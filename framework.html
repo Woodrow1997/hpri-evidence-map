@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Understanding Homelessness — HPRI Framework</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: #f4f1ec;
+  color: #1a1a1a;
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+.site-header {
+  background: #8B0000;
+  color: white;
+  padding: 18px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 3px solid #FFCC00;
+}
+.site-header .brand {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+.site-header nav a {
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  font-size: 13px;
+  margin-left: 24px;
+}
+.site-header nav a:hover { color: white; }
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(135deg, #1a0a0a 0%, #3d0f0f 50%, #8B0000 100%);
+  color: white;
+  padding: 64px 40px 56px;
+  text-align: center;
+}
+.hero .eyebrow {
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #FFCC00;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+.hero h1 {
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 300;
+  line-height: 1.2;
+  max-width: 720px;
+  margin: 0 auto 20px;
+}
+.hero h1 strong { font-weight: 700; }
+.hero .subtitle {
+  font-size: 16px;
+  opacity: 0.75;
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ── INTRO PULL QUOTE ── */
+.pull-quote {
+  background: white;
+  border-left: 5px solid #FFCC00;
+  padding: 28px 36px;
+  margin: 40px auto;
+  max-width: 860px;
+  border-radius: 0 8px 8px 0;
+  font-size: 18px;
+  line-height: 1.7;
+  color: #333;
+  font-style: italic;
+}
+.pull-quote cite {
+  display: block;
+  font-style: normal;
+  font-size: 13px;
+  color: #888;
+  margin-top: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ── FRAMEWORK CONTAINER ── */
+.framework-outer {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px 60px;
+}
+
+.framework-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.framework-title h2 {
+  font-size: 22px;
+  font-weight: 300;
+  color: #444;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+.framework-title .divider {
+  width: 60px;
+  height: 3px;
+  background: #8B0000;
+  margin: 12px auto 0;
+}
+
+/* ── THE RIVER DIAGRAM ── */
+.river-diagram {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+}
+
+/* ── LAYER CARDS ── */
+.layer-card {
+  position: relative;
+  border-radius: 12px;
+  padding: 28px 32px;
+  margin-bottom: 0;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+}
+.layer-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+}
+
+/* Connector arrow between cards */
+.flow-arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 36px;
+  position: relative;
+  z-index: 2;
+}
+.flow-arrow::before {
+  content: '';
+  width: 2px;
+  height: 20px;
+  background: #ccc;
+  position: absolute;
+  top: 0;
+}
+.flow-arrow::after {
+  content: '▼';
+  font-size: 12px;
+  color: #aaa;
+  position: absolute;
+  top: 16px;
+}
+.flow-arrow.bidirectional::before {
+  background: linear-gradient(to bottom, #5B4FCF, #C0392B);
+}
+.flow-arrow.bidirectional .bi-label {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 10px;
+  padding: 2px 8px;
+  color: #888;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  position: absolute;
+  right: calc(50% - 120px);
+  top: 8px;
+}
+
+/* Color themes per layer */
+.layer-l1 { background: linear-gradient(135deg, #4a3fc7, #6c5ce7); color: white; }
+.layer-l2 { background: linear-gradient(135deg, #c0392b, #e74c3c); color: white; }
+.layer-l3 { background: linear-gradient(135deg, #d35400, #e67e22); color: white; }
+.layer-l4 { background: linear-gradient(135deg, #1a6ba0, #2980B9); color: white; }
+.layer-outcomes { background: linear-gradient(135deg, #0e7a60, #16A085); color: white; }
+.layer-prevention {
+  background: linear-gradient(135deg, #1a6b3a, #27AE60);
+  color: white;
+}
+.layer-experience {
+  background: linear-gradient(135deg, #6c3483, #8e44ad);
+  color: white;
+}
+
+/* Layer card inner layout */
+.layer-inner {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 20px;
+  align-items: center;
+}
+
+.layer-icon {
+  font-size: 36px;
+  line-height: 1;
+  opacity: 0.9;
+}
+
+.layer-text {}
+.layer-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 4px;
+}
+.layer-title {
+  font-size: clamp(18px, 2.5vw, 24px);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+.layer-desc {
+  font-size: 14px;
+  opacity: 0.85;
+  line-height: 1.6;
+  max-width: 520px;
+}
+
+.layer-bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 160px;
+}
+.layer-bullet {
+  background: rgba(255,255,255,0.15);
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  backdrop-filter: blur(4px);
+}
+
+/* ── MIDDLE ROW: Experience + Prevention side by side ── */
+.middle-row {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 16px;
+  margin: 0;
+}
+.middle-card {
+  border-radius: 12px;
+  padding: 24px 26px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.middle-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+.middle-card .layer-tag { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; opacity: 0.7; margin-bottom: 4px; }
+.middle-card .layer-title { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+.middle-card .layer-desc { font-size: 13px; opacity: 0.85; line-height: 1.55; }
+.middle-card .middle-icon { font-size: 28px; margin-bottom: 10px; }
+
+/* ── FEEDBACK LOOP CALLOUT ── */
+.feedback-loop {
+  background: white;
+  border-radius: 12px;
+  border: 2px dashed #FFCC00;
+  padding: 20px 28px;
+  margin: 8px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.feedback-icon { font-size: 32px; flex-shrink: 0; }
+.feedback-text h3 { font-size: 15px; font-weight: 700; color: #333; margin-bottom: 4px; }
+.feedback-text p { font-size: 13px; color: #666; line-height: 1.6; }
+
+/* ── COVERAGE BAR ── */
+.coverage-section {
+  background: white;
+  border-radius: 12px;
+  padding: 32px 36px;
+  margin-top: 40px;
+}
+.coverage-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 6px;
+}
+.coverage-subtitle {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 24px;
+}
+.coverage-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.cov-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.cov-label {
+  width: 200px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+  flex-shrink: 0;
+}
+.cov-bar-track {
+  flex: 1;
+  height: 10px;
+  background: #f0f0ee;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.cov-bar-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 1s ease;
+}
+.cov-fill-high { background: #27AE60; }
+.cov-fill-mid { background: #f39c12; }
+.cov-fill-low { background: #e74c3c; }
+.cov-pct {
+  width: 40px;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: right;
+}
+.cov-who {
+  font-size: 11px;
+  color: #aaa;
+  width: 140px;
+  flex-shrink: 0;
+}
+
+/* ── KEY STATS ROW ── */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin: 40px 0 0;
+}
+.stat-card {
+  background: white;
+  border-radius: 10px;
+  padding: 20px 16px;
+  text-align: center;
+  border-top: 4px solid #8B0000;
+}
+.stat-num {
+  font-size: 32px;
+  font-weight: 800;
+  color: #8B0000;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-label {
+  font-size: 12px;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* ── MODAL ── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 200;
+  padding: 40px 20px;
+  overflow-y: auto;
+  backdrop-filter: blur(3px);
+}
+.modal-overlay.open { display: flex; justify-content: center; align-items: flex-start; }
+.modal {
+  background: white;
+  border-radius: 16px;
+  max-width: 680px;
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.3);
+}
+.modal-header {
+  padding: 28px 32px 20px;
+  color: white;
+}
+.modal-header .m-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.75;
+  margin-bottom: 6px;
+}
+.modal-header .m-title { font-size: 22px; font-weight: 700; }
+.modal-body { padding: 24px 32px 32px; }
+.modal-body p { font-size: 15px; color: #444; line-height: 1.75; margin-bottom: 14px; }
+.modal-close {
+  float: right;
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  line-height: 32px;
+  text-align: center;
+}
+.modal-topics h3 { font-size: 14px; font-weight: 700; color: #333; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+.topic-chip {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  margin: 3px 4px 3px 0;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  text-decoration: none;
+}
+.topic-chip:hover { opacity: 0.8; }
+.chip-strong { background: #e8f5e9; color: #1a7a3c; border: 1px solid #b2dfdb; }
+.chip-emerging { background: #fff3e0; color: #d4860f; border: 1px solid #ffe0b2; }
+.chip-gap { background: #fce4ec; color: #b83232; border: 1px solid #f8bbd0; }
+.chip-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; margin-right: 5px; vertical-align: middle; }
+
+/* ── CTA ── */
+.cta-bar {
+  background: #8B0000;
+  color: white;
+  text-align: center;
+  padding: 36px 24px;
+  margin-top: 40px;
+}
+.cta-bar h3 { font-size: 20px; font-weight: 300; margin-bottom: 8px; }
+.cta-bar a {
+  display: inline-block;
+  background: #FFCC00;
+  color: #1a1a1a;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 12px 28px;
+  border-radius: 25px;
+  text-decoration: none;
+  margin-top: 12px;
+  transition: transform 0.15s;
+}
+.cta-bar a:hover { transform: scale(1.04); }
+
+/* ── FOOTER ── */
+footer {
+  background: #1a1a1a;
+  color: #888;
+  text-align: center;
+  padding: 20px;
+  font-size: 12px;
+}
+footer a { color: #aaa; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .layer-inner { grid-template-columns: 1fr; }
+  .layer-bullets { display: none; }
+  .middle-row { grid-template-columns: 1fr; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .cov-who { display: none; }
+  .cov-label { width: 140px; }
+  .site-header nav { display: none; }
+  .hero { padding: 40px 20px; }
+  .framework-outer { padding: 0 16px 40px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="brand">HPRI · Homelessness Policy Research Institute</div>
+  <nav>
+    <a href="index.html">Evidence Map</a>
+    <a href="https://hpri.usc.edu" target="_blank">HPRI Website</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="eyebrow">HPRI Research Framework</div>
+  <h1>Homelessness is <strong>not one problem</strong>.<br>It is four interacting forces.</h1>
+  <p class="subtitle">To understand — and end — homelessness, we need a framework that connects structural causes, lived experience, and system responses. This is ours.</p>
+</div>
+
+<!-- PULL QUOTE -->
+<div style="background:#f4f1ec; padding: 0 24px;">
+  <blockquote class="pull-quote">
+    "Homelessness is poorly understood not because the evidence is lacking, but because the evidence is fragmented. No common framework connects it. The result is a public conversation dominated by oversimplification."
+    <cite>— Benjamin F. Henwood, PhD · HPRI</cite>
+  </blockquote>
+</div>
+
+<!-- KEY STATS -->
+<div class="framework-outer">
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-num">52K+</div>
+      <div class="stat-label">People sleeping outside in LA County on any given night</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">8→30%</div>
+      <div class="stat-label">Black residents: 8% of LA population, 30%+ of homeless population</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">7.2M</div>
+      <div class="stat-label">Affordable homes missing nationally — the structural deficit</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">579</div>
+      <div class="stat-label">Research studies in the HPRI catalogue — and counting</div>
+    </div>
+  </div>
+</div>
+
+<!-- FRAMEWORK DIAGRAM -->
+<div class="framework-outer">
+
+  <div class="framework-title">
+    <h2>The Framework</h2>
+    <div class="divider"></div>
+  </div>
+
+  <div class="river-diagram">
+
+    <!-- LAYER 1 -->
+    <div class="layer-card layer-l1" onclick="openLayer('l1')">
+      <div class="layer-inner">
+        <div class="layer-icon">🗣️</div>
+        <div class="layer-text">
+          <div class="layer-tag">Layer 1 · The Foundation of All Policy</div>
+          <div class="layer-title">Public Attitudes & Political Will</div>
+          <div class="layer-desc">Every investment in housing, services, or prevention ultimately depends on political will — which is shaped by public attitudes. When communities understand homelessness as a systemic failure, they support sustained investment. When they see it as individual failure, they fund sweeps.</div>
+        </div>
+        <div class="layer-bullets">
+          <div class="layer-bullet">🔴 Evidence gap</div>
+          <div class="layer-bullet">Stigma & framing</div>
+          <div class="layer-bullet">Narrative change</div>
+          <div class="layer-bullet">Political investment</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARROW (bidirectional 1↔2) -->
+    <div class="flow-arrow bidirectional">
+      <div class="bi-label">↕ mutually reinforcing</div>
+    </div>
+
+    <!-- LAYER 2 -->
+    <div class="layer-card layer-l2" onclick="openLayer('l2')">
+      <div class="layer-inner">
+        <div class="layer-icon">🏗️</div>
+        <div class="layer-text">
+          <div class="layer-tag">Layer 2 · Root Causes</div>
+          <div class="layer-title">Structural Conditions</div>
+          <div class="layer-desc">Racial inequality, a shortage of 7.2 million affordable homes, stagnant wages, and decades of policy failure create vulnerability. These forces don't cause homelessness directly — they make people one crisis away from losing housing. <strong>Universal prevention begins here.</strong></div>
+        </div>
+        <div class="layer-bullets">
+          <div class="layer-bullet">✓ Strong evidence</div>
+          <div class="layer-bullet">Housing shortage</div>
+          <div class="layer-bullet">Racial inequity</div>
+          <div class="layer-bullet">Wage stagnation</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARROW -->
+    <div class="flow-arrow"></div>
+
+    <!-- LAYER 3 -->
+    <div class="layer-card layer-l3" onclick="openLayer('l3')">
+      <div class="layer-inner">
+        <div class="layer-icon">🌊</div>
+        <div class="layer-text">
+          <div class="layer-tag">Layer 3 · The Breaking Point</div>
+          <div class="layer-title">Pathways into Homelessness</div>
+          <div class="layer-desc">Vulnerability becomes homelessness through specific pathways: the foster care system discharges young people with nowhere to go; incarceration leaves people with no housing or income; the behavioral health system has never fully replaced institutions it shut down. Discrimination and isolation do the rest.</div>
+        </div>
+        <div class="layer-bullets">
+          <div class="layer-bullet">✓ Strong evidence</div>
+          <div class="layer-bullet">Foster care exits</div>
+          <div class="layer-bullet">Incarceration</div>
+          <div class="layer-bullet">Behavioral health</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARROW -->
+    <div class="flow-arrow"></div>
+
+    <!-- MIDDLE ROW: Experience + Prevention -->
+    <div class="middle-row">
+
+      <div class="middle-card layer-experience" onclick="openLayer('experience')">
+        <div class="middle-icon">🔬</div>
+        <div class="layer-tag">Empirical Domain · The Terrain Research Must Make Visible</div>
+        <div class="layer-title">The Experience of Homelessness</div>
+        <div class="layer-desc">Who actually experiences homelessness? How does it affect health, aging, and housing over time? How do people navigate services — and who falls through every gap? This is the evidence layer that makes everything else legible. Without it, we're designing systems for people we don't actually know. HPRI's PATHS study is one of the only longitudinal datasets on unsheltered people in the country.</div>
+      </div>
+
+      <div class="middle-card layer-prevention" onclick="openLayer('prevention')">
+        <div class="middle-icon">🛡️</div>
+        <div class="layer-tag">Cross-Cutting · Operates at Every Level</div>
+        <div class="layer-title">Prevention</div>
+        <div class="layer-desc">Prevention isn't a single program — it's a principle. Upstream: build affordable housing, raise wages, reduce inequality. Midstream: eviction diversion, emergency rental assistance. Downstream: rapid rehousing before crisis becomes chronic. <strong>Prevention is consistently the most cost-effective investment available and the most chronically underfunded.</strong></div>
+      </div>
+
+    </div>
+
+    <!-- ARROW -->
+    <div class="flow-arrow"></div>
+
+    <!-- LAYER 4 -->
+    <div class="layer-card layer-l4" onclick="openLayer('l4')">
+      <div class="layer-inner">
+        <div class="layer-icon">🏥</div>
+        <div class="layer-text">
+          <div class="layer-tag">Layer 4 · How We Respond</div>
+          <div class="layer-title">Institutional & Community Response</div>
+          <div class="layer-desc">Outreach, shelters, coordinated entry, permanent housing, street medicine, hospitals, courts, and schools all engage people experiencing homelessness. So do faith organizations, mutual aid networks, and peer workers — often reaching people that institutions cannot. The formal system and the community response are not separate: they are two halves of one ecosystem.</div>
+        </div>
+        <div class="layer-bullets">
+          <div class="layer-bullet">✓ Housing First</div>
+          <div class="layer-bullet">~ Coordinated entry</div>
+          <div class="layer-bullet">🔴 Faith/community</div>
+          <div class="layer-bullet">🔴 Workforce</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARROW -->
+    <div class="flow-arrow"></div>
+
+    <!-- OUTCOMES -->
+    <div class="layer-card layer-outcomes" onclick="openLayer('outcomes')">
+      <div class="layer-inner">
+        <div class="layer-icon">🏠</div>
+        <div class="layer-text">
+          <div class="layer-tag">Outcomes · For People and Communities</div>
+          <div class="layer-title">Individual & Community Outcomes</div>
+          <div class="layer-desc">Success means housing stability, health recovery, dignity, and economic participation — for individuals. But it also means safer public spaces, reduced emergency costs, stronger neighborhoods, and reduced racial inequity — for everyone. Addressing homelessness isn't charity. It's a public investment with returns for the whole community.</div>
+        </div>
+        <div class="layer-bullets">
+          <div class="layer-bullet">✓ Housing stability</div>
+          <div class="layer-bullet">~ Community benefit</div>
+          <div class="layer-bullet">🔴 Racial equity</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEEDBACK LOOP -->
+    <div class="feedback-loop">
+      <div class="feedback-icon">🔄</div>
+      <div class="feedback-text">
+        <h3>The Feedback Loop: Outcomes Shape Attitudes</h3>
+        <p>When homelessness visibly worsens, stigma intensifies. When programs work — when communities see former neighbors stably housed, when costs fall, when public spaces improve — support for investment grows. Research that documents these outcomes clearly and accessibly is itself an intervention in the political layer that governs everything else.</p>
+      </div>
+    </div>
+
+  </div><!-- /river-diagram -->
+
+  <!-- COVERAGE SECTION -->
+  <div class="coverage-section" style="margin-top:48px;">
+    <div class="coverage-title">What Current Evaluation Infrastructure Covers</div>
+    <div class="coverage-subtitle">How LA County's existing evaluation efforts map onto this framework — and where the gaps are</div>
+    <div class="coverage-bars">
+      <div class="cov-row">
+        <div class="cov-label">Formal response system</div>
+        <div class="cov-bar-track"><div class="cov-bar-fill cov-fill-high" style="width:90%"></div></div>
+        <div class="cov-pct" style="color:#27AE60">90%</div>
+        <div class="cov-who">Measure A / AEA</div>
+      </div>
+      <div class="cov-row">
+        <div class="cov-label">Housing supply</div>
+        <div class="cov-bar-track"><div class="cov-bar-fill cov-fill-mid" style="width:55%"></div></div>
+        <div class="cov-pct" style="color:#f39c12">55%</div>
+        <div class="cov-who">LACAHSA</div>
+      </div>
+      <div class="cov-row">
+        <div class="cov-label">Pathways (foster care, CJ)</div>
+        <div class="cov-bar-track"><div class="cov-bar-fill cov-fill-mid" style="width:30%"></div></div>
+        <div class="cov-pct" style="color:#f39c12">30%</div>
+        <div class="cov-who">Partial / AEA</div>
+      </div>
+      <div class="cov-row">
+        <div class="cov-label">Lived experience data</div>
+        <div class="cov-bar-track"><div class="cov-bar-fill cov-fill-mid" style="width:25%"></div></div>
+        <div class="cov-pct" style="color:#f39c12">25%</div>
+        <div class="cov-who">HPRI / PATHS</div>
+      </div>
+      <div class="cov-row">
+        <div class="cov-label">Structural conditions</div>
+        <div class="cov-bar-track"><div class="cov-bar-fill cov-fill-low" style="width:10%"></div></div>
+        <div class="cov-pct" style="color:#e74c3c">10%</div>
+        <div class="cov-who">Not in scope</div>
+      </div>
+      <div class="cov-row">
+        <div class="cov-label">Community / faith response</div>
+        <div class="cov-bar-track"><div class="cov-bar-fill cov-fill-low" style="width:5%"></div></div>
+        <div class="cov-pct" style="color:#e74c3c">5%</div>
+        <div class="cov-who">HPRI initiative</div>
+      </div>
+      <div class="cov-row">
+        <div class="cov-label">Public attitudes & narratives</div>
+        <div class="cov-bar-track"><div class="cov-bar-fill cov-fill-low" style="width:2%"></div></div>
+        <div class="cov-pct" style="color:#e74c3c">&lt;5%</div>
+        <div class="cov-who">Not evaluated</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /framework-outer -->
+
+<!-- CTA -->
+<div class="cta-bar">
+  <h3>Explore the full evidence map — 579 research studies organized by this framework</h3>
+  <a href="index.html">Browse the Evidence Map →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <strong style="color:#ccc;">Homelessness Policy Research Institute (HPRI)</strong> · USC Suzanne Dworak-Peck School of Social Work ·
+  <a href="https://hpri.usc.edu" target="_blank">hpri.usc.edu</a><br>
+  Framework: Benjamin F. Henwood, PhD, MSW · v1.0 · June 2026
+</footer>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
+<div class="modal" id="modal">
+  <div class="modal-header" id="modal-header">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="m-tag" id="modal-tag"></div>
+    <div class="m-title" id="modal-title"></div>
+  </div>
+  <div class="modal-body" id="modal-body"></div>
+</div>
+</div>
+
+<script>
+const LAYERS = {
+  l1: {
+    tag: "Layer 1 · Public Attitudes & Political Will",
+    title: "The Foundation of All Policy",
+    color: "linear-gradient(135deg, #4a3fc7, #6c5ce7)",
+    body: `<p>Every policy intervention — housing construction, service funding, prevention programs — ultimately depends on political will, which is shaped by public attitudes. Stigma and fear have historically driven policy responses that criminalize rather than address homelessness.</p>
+    <p>Sweeps and anti-camping ordinances persist despite clear evidence that they do not reduce homelessness, in part because they respond to public discomfort rather than public health. Conversely, when communities understand homelessness as a systemic failure — not an individual moral failing — they become more willing to support sustained investment.</p>
+    <p>Critically, Layer 1 and Layer 2 are <strong>mutually reinforcing</strong>: structural conditions shape what feels "normal" and politically tolerable, while public attitudes determine which structural investments get made and sustained.</p>`,
+    topics: [
+      { label: "How do public attitudes form and change?", status: "gap" },
+      { label: "What drives political will for investment?", status: "gap" },
+      { label: "How does stigma sustain criminalization?", status: "strong" },
+      { label: "Do community benefits shift public support?", status: "emerging" },
+    ]
+  },
+  l2: {
+    tag: "Layer 2 · Structural Conditions",
+    title: "The Root Causes of Vulnerability",
+    color: "linear-gradient(135deg, #c0392b, #e74c3c)",
+    body: `<p>Structural conditions create vulnerability without directly causing homelessness. Four are most significant: racial and economic inequality; a shortage of 7.2 million affordable homes; wages that haven't kept pace with housing costs; and decades of federal and state policy failure that eroded the housing safety net.</p>
+    <p>The evidence here is strong. Colburn and Aldern (2022) show housing market conditions — vacancy rates, rent levels — are the strongest predictor of homelessness rates across cities. Los Angeles has among the worst housing conditions in the nation.</p>
+    <p><strong>Universal prevention begins here:</strong> investments in affordable housing supply, income supports, and policies that reduce racial and economic inequality are the most upstream form of homelessness prevention available.</p>`,
+    topics: [
+      { label: "How does housing scarcity drive homelessness?", status: "strong" },
+      { label: "How does racial inequality produce racial disparity?", status: "strong" },
+      { label: "How does wage stagnation increase housing instability?", status: "strong" },
+      { label: "How have policy failures eroded the safety net?", status: "strong" },
+    ]
+  },
+  l3: {
+    tag: "Layer 3 · Pathways into Homelessness",
+    title: "Where Vulnerability Becomes Crisis",
+    color: "linear-gradient(135deg, #d35400, #e67e22)",
+    body: `<p>Vulnerability becomes homelessness through specific pathways. <strong>System failures</strong> are when institutions discharge people without adequate housing or support: foster care, criminal justice, and behavioral health account for a disproportionate share of homelessness entries.</p>
+    <p>Youth aging out of foster care face some of the highest homelessness risk of any population. People released from incarceration face compounding barriers — criminal records, loss of benefits, abrupt transitions. The legacy of deinstitutionalization continues to produce homelessness by discharging people with serious mental illness into communities without adequate support.</p>
+    <p><strong>Societal barriers</strong> — discrimination in housing and employment, weak social support networks, limited income — do the rest. These aren't individual failures. They are predictable, preventable outcomes of how systems are designed.</p>`,
+    topics: [
+      { label: "How does foster care produce youth homelessness?", status: "strong" },
+      { label: "How does incarceration lead to homelessness?", status: "strong" },
+      { label: "How does the behavioral health system fail?", status: "strong" },
+      { label: "How does discrimination convert vulnerability to crisis?", status: "emerging" },
+      { label: "What role does social isolation play?", status: "emerging" },
+    ]
+  },
+  experience: {
+    tag: "Empirical Domain · The Experience of Homelessness",
+    title: "Making the Invisible Visible",
+    color: "linear-gradient(135deg, #6c3483, #8e44ad)",
+    body: `<p>Situated between the pathways that produce homelessness and the systems that respond to it is a domain of inquiry distinct in kind from the causal layers: the lived experience of homelessness itself.</p>
+    <p>Understanding who experiences homelessness, how they survive, and how their health and housing trajectories unfold over time is foundational to everything else. It provides the evidence base for evaluating whether systems are reaching the right people, whether disparities are improving, and whether interventions are producing durable change.</p>
+    <p>HPRI's <strong>PATHS study</strong> (Periodic Assessment of Trajectories of Housing, Homelessness, and Health) is one of the only longitudinal, population-representative studies of unsheltered people in the country. It documents health trajectories, housing cycling patterns, and service engagement in ways that administrative data simply cannot.</p>`,
+    topics: [
+      { label: "Who experiences homelessness — and how has it changed?", status: "emerging" },
+      { label: "How does homelessness accelerate aging and harm health?", status: "strong" },
+      { label: "What are the housing trajectories over time? (PATHS)", status: "emerging" },
+      { label: "Who connects to services — and who doesn't?", status: "emerging" },
+      { label: "How is social connection maintained or lost?", status: "gap" },
+    ]
+  },
+  prevention: {
+    tag: "Cross-Cutting · Prevention",
+    title: "The Most Underfunded Tool We Have",
+    color: "linear-gradient(135deg, #1a6b3a, #27AE60)",
+    body: `<p>Prevention doesn't occupy a single position in this framework — it operates across multiple layers.</p>
+    <p><strong>Universal prevention</strong> addresses structural conditions: investments in affordable housing supply, income supports, and reducing racial and economic inequality are the most upstream forms of prevention available.</p>
+    <p><strong>Targeted prevention</strong> operates at the boundary between vulnerability and crisis: eviction diversion programs, emergency rental assistance, and rapid rehousing before homelessness becomes chronic represent some of the most cost-effective investments available.</p>
+    <p>Research consistently shows that preventing homelessness is substantially less expensive than addressing it after the fact. The consistent underfunding of prevention — at both the structural and targeted levels — represents one of the most significant and correctable failures of the current American response.</p>`,
+    topics: [
+      { label: "What is the ROI of prevention vs. response?", status: "strong" },
+      { label: "Which targeted interventions work best?", status: "emerging" },
+      { label: "How does housing supply function as prevention?", status: "strong" },
+    ]
+  },
+  l4: {
+    tag: "Layer 4 · Institutional & Community Response",
+    title: "The System That Responds",
+    color: "linear-gradient(135deg, #1a6ba0, #2980B9)",
+    body: `<p>Once a person becomes homeless, three components respond. The <strong>formal homeless services system</strong> — outreach, coordinated entry, interim housing, permanent housing, and stability supports — is most visible to policymakers and most directly evaluated.</p>
+    <p><strong>Adjacent institutional systems</strong> — healthcare, criminal justice, and schools — also shape trajectories. Emergency departments, mental health courts, and school social workers all engage with people experiencing homelessness. These systems are not funded through homelessness-specific streams, but their practices directly affect whether people stabilize or cycle back into crisis.</p>
+    <p><strong>Community-based response</strong> — mutual aid networks, faith organizations, peer support — reaches people and builds trust in ways institutions cannot. This component is largely invisible to official data systems and almost never evaluated. HPRI's <strong>USC Housing LA Faith-Based Initiative</strong> is directly addressing this gap — mapping faith-based land assets and community engagement capacity across LA.</p>`,
+    topics: [
+      { label: "What is the evidence for Housing First?", status: "strong" },
+      { label: "How effective is street outreach?", status: "emerging" },
+      { label: "How well does coordinated entry work?", status: "emerging" },
+      { label: "What is the role of peer support?", status: "emerging" },
+      { label: "What is the role of faith & community organizations?", status: "gap" },
+      { label: "What workforce conditions affect service quality?", status: "gap" },
+    ]
+  },
+  outcomes: {
+    tag: "Outcomes · Individual & Community",
+    title: "What Success Looks Like",
+    color: "linear-gradient(135deg, #0e7a60, #16A085)",
+    body: `<p>Successful response produces two categories of outcomes. <strong>Individual outcomes</strong> — housing stability, health recovery, employment, dignity, and agency — are the most direct measure of the system's success.</p>
+    <p><strong>Community outcomes</strong> — safer public spaces, reduced taxpayer costs, economic productivity, neighborhood stability, and reduced racial inequity — represent the broader social value of ending homelessness.</p>
+    <p>This second category is frequently underemphasized. It matters enormously for the political layer: framing homelessness as a public investment with returns for everyone — not just for a vulnerable minority — is essential to building the durable political will that Layer 1 requires.</p>
+    <p>Outcomes feed back into attitudes. When programs work visibly, support grows. This is the feedback loop that, if activated, becomes self-reinforcing.</p>`,
+    topics: [
+      { label: "What individual outcomes does stable housing produce?", status: "strong" },
+      { label: "What are the community-level benefits?", status: "emerging" },
+      { label: "Are racial disparities in outcomes narrowing?", status: "gap" },
+    ]
+  }
+};
+
+const STATUS_COLORS = { strong: '#27AE60', emerging: '#d4860f', gap: '#b83232' };
+const STATUS_LABELS = { strong: '✓ Strong evidence', emerging: '~ Emerging evidence', gap: '✗ Evidence gap' };
+
+function openLayer(id) {
+  const layer = LAYERS[id];
+  if (!layer) return;
+  document.getElementById('modal-header').style.background = layer.color;
+  document.getElementById('modal-tag').textContent = layer.tag;
+  document.getElementById('modal-title').textContent = layer.title;
+
+  let topicsHtml = '';
+  if (layer.topics && layer.topics.length) {
+    const chips = layer.topics.map(t =>
+      `<span class="topic-chip chip-${t.status}">
+        <span class="chip-dot" style="background:${STATUS_COLORS[t.status]}"></span>
+        ${t.label}
+      </span>`
+    ).join('');
+    topicsHtml = `<div class="modal-topics" style="margin-top:20px; padding-top:20px; border-top:1px solid #eee;">
+      <h3>Key Research Questions</h3>
+      ${chips}
+      <p style="margin-top:14px; font-size:12px; color:#999;">
+        <span style="color:${STATUS_COLORS.strong}">✓ Strong evidence</span> &nbsp;
+        <span style="color:${STATUS_COLORS.emerging}">~ Emerging evidence</span> &nbsp;
+        <span style="color:${STATUS_COLORS.gap}">✗ Evidence gap</span>
+      </p>
+    </div>`;
+  }
+  document.getElementById('modal-body').innerHTML = layer.body + topicsHtml;
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+}
+
+// Animate coverage bars on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.cov-bar-fill').forEach(bar => {
+        const w = bar.style.width;
+        bar.style.width = '0%';
+        setTimeout(() => bar.style.width = w, 100);
+      });
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.3 });
+const covSection = document.querySelector('.coverage-section');
+if (covSection) {
+  // Pre-set widths to 0, then animate
+  document.querySelectorAll('.cov-bar-fill').forEach(bar => {
+    bar.dataset.width = bar.style.width;
+    bar.style.width = '0%';
+  });
+  observer.observe(covSection);
+}
+</script>
+</body>
+</html>
