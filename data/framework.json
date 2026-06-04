@@ -1,0 +1,405 @@
+{
+  "meta": {
+    "title": "Understanding Homelessness: A Research Framework",
+    "author": "Benjamin F. Henwood, PhD, MSW",
+    "institution": "Homelessness Policy Research Institute (HPRI), USC Suzanne Dworak-Peck School of Social Work",
+    "version": "1.0",
+    "lastUpdated": "2026-06-04"
+  },
+  "sections": [
+    {
+      "id": "layer1",
+      "type": "layer",
+      "label": "Layer 1",
+      "title": "Public Attitudes & Political Will",
+      "shortDesc": "How public understanding and political choices shape what interventions are possible.",
+      "color": "#5B4FCF",
+      "position": 1,
+      "summary": "Every policy intervention ultimately depends on political will, which is shaped by public attitudes. Stigma and fear have historically driven criminalization rather than solutions. When communities understand homelessness as systemic failure, they support sustained investment. Attitudes can change — and research that communicates what works is itself an intervention in this layer.",
+      "topics": [
+        {
+          "id": "l1-t1",
+          "question": "How do public attitudes toward homelessness form and change?",
+          "evidenceStatus": "emerging",
+          "summary": "Research on stigma, framing effects, and narrative change is growing but underdeveloped in the homelessness context. Communication and media framing studies show attitudes are malleable.",
+          "gapNote": "Little rigorous research on what messaging strategies most effectively shift public opinion toward systemic framing.",
+          "tags": ["public opinion", "stigma", "narrative", "media"],
+          "citations": []
+        },
+        {
+          "id": "l1-t2",
+          "question": "What is the relationship between public opinion and homelessness policy outcomes?",
+          "evidenceStatus": "gap",
+          "summary": "The feedback loop between public attitudes and policy investment is theorized but rarely studied empirically in the homelessness domain.",
+          "gapNote": "No systematic evaluation of how public attitudes drive or constrain homelessness funding decisions at local, state, or federal level.",
+          "tags": ["political will", "policy", "feedback loop"],
+          "citations": []
+        },
+        {
+          "id": "l1-t3",
+          "question": "How does stigma drive criminalization policies (sweeps, anti-camping ordinances)?",
+          "evidenceStatus": "strong",
+          "summary": "Evidence is consistent that criminalization policies (sweeps, anti-camping laws) do not reduce homelessness and often worsen health and housing outcomes. They persist largely because they respond to public discomfort rather than evidence.",
+          "gapNote": "Strong evidence on ineffectiveness; weaker evidence on how to mobilize political opposition to these policies.",
+          "tags": ["criminalization", "sweeps", "anti-camping", "stigma", "policy"],
+          "citations": []
+        },
+        {
+          "id": "l1-t4",
+          "question": "How do community benefits of addressing homelessness affect political support?",
+          "evidenceStatus": "emerging",
+          "summary": "Framing homelessness as a public investment with returns for all (cost savings, safer public spaces, reduced racial inequity) may build broader political coalitions. Some evidence from cost-of-homelessness studies.",
+          "gapNote": "Limited research on how community-benefit framing influences political will vs. charitable/needs-based framing.",
+          "tags": ["community outcomes", "framing", "political will", "cost savings"],
+          "citations": []
+        }
+      ]
+    },
+    {
+      "id": "layer2",
+      "type": "layer",
+      "label": "Layer 2",
+      "title": "Structural Conditions",
+      "shortDesc": "The upstream forces — inequality, housing scarcity, wage stagnation — that create vulnerability.",
+      "color": "#C0392B",
+      "position": 2,
+      "summary": "Structural conditions create vulnerability without directly causing homelessness. Four forces are most significant: racial and economic inequality, affordable housing shortage (7.2M unit gap nationally), wage stagnation, and federal/state policy failures. Universal prevention begins here.",
+      "topics": [
+        {
+          "id": "l2-t1",
+          "question": "How does housing market scarcity drive homelessness rates?",
+          "evidenceStatus": "strong",
+          "summary": "Colburn and Aldern (2022) and others demonstrate that housing market conditions — vacancy rates, rent levels, cost burden — are the strongest structural predictors of homelessness rates across jurisdictions. LA has among the worst housing conditions nationally.",
+          "gapNote": "Strong cross-sectional evidence; less longitudinal work on how supply changes affect homelessness rates over time.",
+          "tags": ["housing market", "affordability", "supply", "structural"],
+          "citations": [
+            {"authors": "Colburn & Aldern", "year": 2022, "title": "Homelessness Is a Housing Problem", "url": ""}
+          ]
+        },
+        {
+          "id": "l2-t2",
+          "question": "How do racial and economic inequalities produce racial disparities in homelessness?",
+          "evidenceStatus": "strong",
+          "summary": "Black residents are 8% of LA County population but 30%+ of homeless population. Historical exclusion through redlining, discriminatory lending, unequal education and employment access has produced the structural vulnerability that manifests as racial disparity in homelessness.",
+          "gapNote": "Descriptive evidence of disparity is very strong; causal pathway research linking specific structural factors to present-day disparities is less developed.",
+          "tags": ["racial disparity", "redlining", "structural racism", "Black", "AIAN"],
+          "citations": [
+            {"authors": "Geronimus", "year": 1992, "title": "Weathering hypothesis and cumulative disadvantage", "url": ""}
+          ]
+        },
+        {
+          "id": "l2-t3",
+          "question": "How does wage stagnation and income inadequacy contribute to housing instability?",
+          "evidenceStatus": "strong",
+          "summary": "For lowest-income workers, wages have not kept pace with housing costs, leaving millions of households one crisis away from instability. NLIHC data documents the wage required to afford a 2-BR unit nationally and in each state.",
+          "gapNote": "Macro-level evidence is strong; less research on how marginal income changes affect homelessness risk at the individual level.",
+          "tags": ["wages", "income", "affordability", "poverty"],
+          "citations": [
+            {"authors": "NLIHC", "year": 2024, "title": "Out of Reach", "url": ""}
+          ]
+        },
+        {
+          "id": "l2-t4",
+          "question": "How have federal and state policy decisions eroded the housing safety net?",
+          "evidenceStatus": "strong",
+          "summary": "Decades of disinvestment in public housing, zoning barriers to multifamily construction, inadequate behavioral health infrastructure, and underfunded income support programs have produced the 7.2M affordable home deficit and a weakened safety net.",
+          "gapNote": "Historical and policy analysis is well-documented; counterfactual modeling of what different policy choices would have produced is rare.",
+          "tags": ["public housing", "policy failure", "disinvestment", "safety net"],
+          "citations": [
+            {"authors": "NLIHC", "year": 2024, "title": "The Gap Report", "url": ""}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "layer3",
+      "type": "layer",
+      "label": "Layer 3",
+      "title": "Pathways into Homelessness",
+      "shortDesc": "How system failures and societal barriers convert vulnerability into homelessness.",
+      "color": "#E67E22",
+      "position": 3,
+      "summary": "Vulnerability becomes homelessness through two pathways: system failures (foster care, criminal justice, behavioral health) and societal barriers (discrimination, limited income, absent social support). Preventing these pipelines requires policy change in systems not primarily funded through homelessness streams.",
+      "topics": [
+        {
+          "id": "l3-t1",
+          "question": "How does the foster care system produce homelessness among youth?",
+          "evidenceStatus": "strong",
+          "summary": "Youth aging out of foster care face some of the highest homelessness risk of any population. Research documents lack of housing, income, and social support at transition, and the association with subsequent homelessness.",
+          "gapNote": "Evidence is strong on risk; less evidence on which transition supports are most effective at preventing homelessness.",
+          "tags": ["youth", "foster care", "aging out", "pathways"],
+          "citations": []
+        },
+        {
+          "id": "l3-t2",
+          "question": "How does the criminal justice system contribute to homelessness?",
+          "evidenceStatus": "strong",
+          "summary": "People released from incarceration face compounding barriers: criminal records, loss of benefits (including housing), abrupt community transitions without support. The association between incarceration and subsequent homelessness is well-documented.",
+          "gapNote": "Less evidence on which reentry supports most effectively prevent homelessness; limited data on the reverse pathway (homelessness increasing criminal justice contact).",
+          "tags": ["criminal justice", "incarceration", "reentry", "pathways"],
+          "citations": []
+        },
+        {
+          "id": "l3-t3",
+          "question": "How does the behavioral health system (including deinstitutionalization) produce homelessness?",
+          "evidenceStatus": "strong",
+          "summary": "The legacy of deinstitutionalization, combined with inadequate community mental health infrastructure, has produced a persistent pipeline from psychiatric crisis to homelessness. The association between serious mental illness and homelessness is well-documented.",
+          "gapNote": "Descriptive evidence very strong; less evidence on which specific system-level changes would break the pipeline.",
+          "tags": ["behavioral health", "mental illness", "deinstitutionalization", "pathways"],
+          "citations": []
+        },
+        {
+          "id": "l3-t4",
+          "question": "How do housing and employment discrimination convert vulnerability to homelessness?",
+          "evidenceStatus": "emerging",
+          "summary": "Persistent discrimination in housing and employment markets leaves vulnerable people — particularly Black, AIAN, and formerly incarcerated individuals — without effective safety nets even when other supports are nominally available.",
+          "gapNote": "Evidence of discrimination is strong; specific pathways from discrimination to homelessness are less studied.",
+          "tags": ["discrimination", "housing", "employment", "societal barriers"],
+          "citations": []
+        },
+        {
+          "id": "l3-t5",
+          "question": "What role do absent or weak social support networks play in homelessness pathways?",
+          "evidenceStatus": "emerging",
+          "summary": "Social isolation and lack of informal support networks (family, community) are associated with both homelessness entry and difficulty exiting. Social connection is both a protective factor and a resource that homelessness itself erodes.",
+          "gapNote": "Conceptually well-understood; less rigorous quantitative evidence on the independent contribution of social isolation.",
+          "tags": ["social support", "isolation", "protective factors", "pathways"],
+          "citations": []
+        },
+        {
+          "id": "l3-t6",
+          "question": "What is the cross-cutting role of schools in pathways and prevention?",
+          "evidenceStatus": "emerging",
+          "summary": "Schools can be a pathway (failure to identify at-risk youth) or a prevention site (McKinney-Vento supports, early identification). For families experiencing homelessness, they are a key point of connection to the response system.",
+          "gapNote": "Role is well-recognized but under-evaluated; limited rigorous evidence on effectiveness of school-based homelessness prevention.",
+          "tags": ["schools", "youth", "McKinney-Vento", "prevention", "families"],
+          "citations": []
+        }
+      ]
+    },
+    {
+      "id": "prevention",
+      "type": "crosscutting",
+      "label": "Prevention",
+      "title": "Prevention: A Cross-Cutting Imperative",
+      "shortDesc": "Upstream structural investment and targeted crisis diversion — the most cost-effective responses.",
+      "color": "#27AE60",
+      "position": 3.5,
+      "summary": "Prevention operates across all layers: universal prevention addresses structural conditions (Layers 1–2); targeted prevention operates at the boundary of Layer 3 and the response system. Research consistently shows prevention is substantially cheaper than addressing homelessness after the fact. Its consistent underfunding is one of the most significant failures of the current American response.",
+      "topics": [
+        {
+          "id": "prev-t1",
+          "question": "What is the return on investment of homelessness prevention vs. response?",
+          "evidenceStatus": "strong",
+          "summary": "Research consistently demonstrates that preventing homelessness is substantially less expensive than addressing it after the fact. Cost analyses of eviction diversion, rapid rehousing, and emergency rental assistance document high ROI.",
+          "gapNote": "Evidence is strong overall; less work on cost-effectiveness comparisons across specific prevention program types.",
+          "tags": ["prevention", "cost-effectiveness", "ROI", "eviction diversion"],
+          "citations": [
+            {"authors": "Culhane, Metraux & Byrne", "year": 2011, "title": "Testing a typology of family homelessness", "url": ""}
+          ]
+        },
+        {
+          "id": "prev-t2",
+          "question": "Which targeted prevention interventions are most effective at the individual/household level?",
+          "evidenceStatus": "emerging",
+          "summary": "Eviction diversion programs, emergency rental assistance, and rapid rehousing before crisis becomes chronic show strong evidence. Targeting is a key unresolved question — who to serve with limited resources.",
+          "gapNote": "Active area of research; better evidence on what works than on who to target with what intervention.",
+          "tags": ["eviction diversion", "rapid rehousing", "emergency rental assistance", "targeting"],
+          "citations": []
+        },
+        {
+          "id": "prev-t3",
+          "question": "How can affordable housing investment function as universal homelessness prevention?",
+          "evidenceStatus": "strong",
+          "summary": "Housing supply investment is the most upstream prevention available. Connections between housing market conditions and homelessness rates are well-established, supporting housing production as prevention.",
+          "gapNote": "Macro-level evidence is strong; less evidence on which housing types and locations most effectively prevent homelessness specifically.",
+          "tags": ["affordable housing", "universal prevention", "housing supply", "structural"],
+          "citations": []
+        }
+      ]
+    },
+    {
+      "id": "experience",
+      "type": "empirical_domain",
+      "label": "Empirical Domain",
+      "title": "The Experience of Homelessness",
+      "shortDesc": "Who experiences homelessness, how they survive, and how their health and housing trajectories unfold.",
+      "color": "#8E44AD",
+      "position": 4,
+      "summary": "This domain is not a causal mechanism but the empirical terrain that research must make visible. It encompasses: who experiences homelessness (demographics, racial disparities), health and aging trajectories (weathering, cumulative harm), housing trajectories (cycling patterns), and social connection and service engagement.",
+      "topics": [
+        {
+          "id": "exp-t1",
+          "question": "Who experiences homelessness? What are the demographics and how have they changed?",
+          "evidenceStatus": "emerging",
+          "summary": "Point-in-time counts provide annual snapshots but are methodologically limited, particularly for unsheltered populations. PATHS and similar longitudinal studies provide richer population-representative data. Racial disproportionality is well-documented; other subpopulation patterns are less well-characterized.",
+          "gapNote": "PIT counts are imprecise; better methods needed for unsheltered enumeration. Limited longitudinal population data.",
+          "tags": ["demographics", "PIT count", "racial disparity", "population", "enumeration"],
+          "citations": []
+        },
+        {
+          "id": "exp-t2",
+          "question": "How does homelessness affect health — including accelerated aging and cumulative harm?",
+          "evidenceStatus": "strong",
+          "summary": "Research on weathering (Geronimus) and cumulative physiological harm from chronic exposure to adverse conditions is well-developed. People experiencing homelessness show health profiles decades older than their chronological age. Specific conditions (cardiovascular, respiratory, mental health, infectious disease) are well-documented.",
+          "gapNote": "Cross-sectional evidence is strong; less longitudinal data on trajectories and recovery with stable housing.",
+          "tags": ["health", "weathering", "accelerated aging", "chronic illness", "mortality"],
+          "citations": [
+            {"authors": "Geronimus", "year": 1992, "title": "Weathering hypothesis", "url": ""},
+            {"authors": "Henwood et al.", "year": "", "title": "PATHS study — health trajectories", "url": ""}
+          ]
+        },
+        {
+          "id": "exp-t3",
+          "question": "What are the housing trajectories of people experiencing homelessness over time?",
+          "evidenceStatus": "emerging",
+          "summary": "PATHS and similar longitudinal studies document patterns of cycling between unsheltered life, shelter, and short-term housing. Understanding trajectory patterns is essential for matching interventions to need.",
+          "gapNote": "Longitudinal population-representative data is rare and expensive to collect. PATHS is one of very few such studies for unsheltered populations.",
+          "tags": ["housing trajectories", "chronic homelessness", "cycling", "longitudinal", "PATHS"],
+          "citations": [
+            {"authors": "Henwood et al.", "year": "", "title": "PATHS — housing trajectories", "url": ""}
+          ]
+        },
+        {
+          "id": "exp-t4",
+          "question": "How do people experiencing homelessness engage (or not) with formal services?",
+          "evidenceStatus": "emerging",
+          "summary": "Research on service engagement documents barriers including trust, trauma, discrimination, and organizational characteristics. Peer support and lived experience leadership improve engagement for people who don't connect with institutional services.",
+          "gapNote": "Patterns of disengagement are documented; less rigorous evidence on which organizational and relational factors most reliably build trust.",
+          "tags": ["service engagement", "trust", "trauma", "peer support", "outreach"],
+          "citations": []
+        },
+        {
+          "id": "exp-t5",
+          "question": "How is social connection maintained or lost during homelessness?",
+          "evidenceStatus": "gap",
+          "summary": "Social isolation is recognized as both a cause and consequence of homelessness, but rigorous research on how social networks function during homelessness — and how they can be supported — is limited.",
+          "gapNote": "Significant gap. Social connection is difficult to measure and rarely included in administrative data.",
+          "tags": ["social connection", "isolation", "networks", "lived experience"],
+          "citations": []
+        }
+      ]
+    },
+    {
+      "id": "layer4",
+      "type": "layer",
+      "label": "Layer 4",
+      "title": "Institutional & Community Response",
+      "shortDesc": "The formal services system, adjacent institutions, and community-based response.",
+      "color": "#2980B9",
+      "position": 5,
+      "summary": "Three components: (1) Formal homeless services system — outreach, coordinated entry, interim housing, permanent housing, stability supports; (2) Adjacent institutional systems — healthcare, criminal justice, schools; (3) Community-based response — mutual aid, faith organizations, peer support. The housing market's absorption capacity is a critical enabling condition for this entire layer.",
+      "topics": [
+        {
+          "id": "l4-t1",
+          "question": "What is the comparative effectiveness of Housing First vs. other permanent housing models?",
+          "evidenceStatus": "strong",
+          "summary": "Housing First is the most rigorously evaluated model in the homelessness field, with RCT and quasi-experimental evidence across multiple countries showing superior housing stability outcomes compared to treatment-first models. Evidence for mental health, substance use, and quality of life outcomes is more mixed.",
+          "gapNote": "Strong evidence on housing stability; contested evidence on health/recovery outcomes. Active political debate despite strong empirical consensus on housing stability.",
+          "tags": ["Housing First", "permanent supportive housing", "comparative effectiveness", "RCT"],
+          "citations": [
+            {"authors": "Tsemberis", "year": 2010, "title": "Housing First: Ending Homelessness, Transforming Systems", "url": ""},
+            {"authors": "Padgett, Henwood & Tsemberis", "year": 2016, "title": "Housing First: Ending Homelessness, Transforming Systems, and Changing Lives", "url": ""}
+          ]
+        },
+        {
+          "id": "l4-t2",
+          "question": "How effective is street outreach at engaging unsheltered people?",
+          "evidenceStatus": "emerging",
+          "summary": "Outreach is widely practiced but inconsistently evaluated. Street medicine and clinically-informed outreach show promise for engaging people with high medical needs. Evidence on what engagement strategies most effectively lead to housing placement is thin.",
+          "gapNote": "Little rigorous evaluation of outreach models; most evidence is descriptive or from small studies.",
+          "tags": ["outreach", "street medicine", "engagement", "unsheltered"],
+          "citations": []
+        },
+        {
+          "id": "l4-t3",
+          "question": "How well does coordinated entry match people to appropriate interventions?",
+          "evidenceStatus": "emerging",
+          "summary": "Coordinated entry systems vary widely in design and performance. Evidence on whether VI-SPDAT and similar prioritization tools are valid, reliable, and equitable is contested. Racial bias in prioritization tools is an active concern.",
+          "gapNote": "Significant gap: limited evidence that current CE systems produce equitable or efficient matches. Tool validity is contested.",
+          "tags": ["coordinated entry", "VI-SPDAT", "prioritization", "equity", "racial bias"],
+          "citations": []
+        },
+        {
+          "id": "l4-t4",
+          "question": "What is the role and effectiveness of peer support and lived experience in the response system?",
+          "evidenceStatus": "emerging",
+          "summary": "Evidence shows peer workers reach and engage people that institutional workers cannot. Peer support is increasingly embedded in formal systems. HPRI has contributed to this evidence base.",
+          "gapNote": "Evidence is growing but largely small-scale; less evidence on how to implement peer support at system scale.",
+          "tags": ["peer support", "lived experience", "workforce", "engagement"],
+          "citations": [
+            {"authors": "Henwood et al.", "year": "", "title": "Peer support in permanent supportive housing", "url": ""}
+          ]
+        },
+        {
+          "id": "l4-t5",
+          "question": "How do healthcare systems (hospitals, EDs, street medicine) interact with homelessness?",
+          "evidenceStatus": "emerging",
+          "summary": "Emergency departments and hospitals are de facto entry points for many people experiencing homelessness. Street medicine provides clinical care in encampments. Medical respite, hospital discharge planning, and medical-legal partnerships show promise.",
+          "gapNote": "Evidence on street medicine and medical respite is growing but limited in scale and rigor.",
+          "tags": ["healthcare", "street medicine", "hospital", "emergency department", "medical respite"],
+          "citations": []
+        },
+        {
+          "id": "l4-t6",
+          "question": "What workforce conditions affect service quality and provider stability?",
+          "evidenceStatus": "gap",
+          "summary": "High turnover, low wages, and inadequate support among frontline providers are recognized problems with equity implications. Frontline workers are often drawn from the same communities as clients. Some providers are themselves at homelessness risk.",
+          "gapNote": "Major gap: workforce conditions are almost entirely absent from formal homelessness evaluation. Measure A's AEA includes it, but evidence base is thin.",
+          "tags": ["workforce", "turnover", "wages", "frontline", "equity"],
+          "citations": []
+        },
+        {
+          "id": "l4-t7",
+          "question": "What is the role of mutual aid, faith organizations, and community response?",
+          "evidenceStatus": "gap",
+          "summary": "Community-based response reaches people and builds trust in ways institutions cannot. It is largely invisible to HMIS and official evaluation systems. Its absence from data does not reflect absence from people's lives.",
+          "gapNote": "Critical gap: almost no rigorous evaluation of community response. Not counted in HMIS, rarely included in RFP processes.",
+          "tags": ["mutual aid", "faith organizations", "community response", "informal"],
+          "citations": []
+        }
+      ]
+    },
+    {
+      "id": "outcomes",
+      "type": "outcomes",
+      "label": "Outcomes",
+      "title": "Individual & Community Outcomes",
+      "shortDesc": "What success looks like — for individuals and for communities.",
+      "color": "#16A085",
+      "position": 6,
+      "summary": "Two interdependent categories: Individual outcomes (housing stability, health recovery, employment, dignity, agency) and Community outcomes (safer public spaces, reduced costs, economic productivity, neighborhood stability, reduced racial inequity). Outcomes feed back into Layer 1 — visible progress builds political will for further investment.",
+      "topics": [
+        {
+          "id": "out-t1",
+          "question": "What individual outcomes does stable housing produce?",
+          "evidenceStatus": "strong",
+          "summary": "Housing stability is consistently achieved by Housing First models. Evidence on health recovery, employment, and quality of life outcomes is more variable but generally positive. Dignity and agency are harder to measure but increasingly included in person-centered outcome frameworks.",
+          "gapNote": "Long-term follow-up data is limited; most studies track outcomes for 1–2 years post-placement.",
+          "tags": ["housing stability", "health", "employment", "quality of life", "dignity"],
+          "citations": [
+            {"authors": "Padgett, Henwood & Tsemberis", "year": 2016, "title": "Housing First", "url": ""}
+          ]
+        },
+        {
+          "id": "out-t2",
+          "question": "What are the community-level benefits of reducing homelessness?",
+          "evidenceStatus": "emerging",
+          "summary": "Cost-of-homelessness studies document savings in emergency services, healthcare, and criminal justice. Evidence on public space, neighborhood stability, and economic productivity is less rigorous. Framing community benefits is politically important but methodologically challenging.",
+          "gapNote": "Cost savings evidence is fairly strong; broader community benefit evidence (public space, economic productivity) is weaker and harder to attribute.",
+          "tags": ["community outcomes", "cost savings", "public space", "economic productivity"],
+          "citations": []
+        },
+        {
+          "id": "out-t3",
+          "question": "How do outcomes vary by race, and are racial disparities in homelessness narrowing?",
+          "evidenceStatus": "gap",
+          "summary": "Racial disparities in homelessness entry are well-documented, but less is known about whether current interventions differentially benefit or fail Black, AIAN, and other overrepresented groups.",
+          "gapNote": "Critical gap. Racially disaggregated outcome data is improving but still limited. Whether the system is reducing racial disparities is largely unknown.",
+          "tags": ["racial equity", "outcomes", "disparities", "Black", "AIAN"],
+          "citations": []
+        }
+      ]
+    }
+  ]
+}

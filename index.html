@@ -1,0 +1,2389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Understanding Homelessness: HPRI Research Framework</title>
+<style>
+  :root {
+    --usc-cardinal: #990000;
+    --usc-gold: #FFCC00;
+    --layer1: #5B4FCF;
+    --layer2: #C0392B;
+    --layer3: #E67E22;
+    --prevention: #27AE60;
+    --experience: #8E44AD;
+    --layer4: #2980B9;
+    --outcomes: #16A085;
+    --strong: #1a7a3c;
+    --emerging: #d4860f;
+    --gap: #b83232;
+    --bg: #f7f7f5;
+    --card-bg: #ffffff;
+    --text: #1a1a1a;
+    --muted: #666;
+    --border: #e0e0e0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--usc-cardinal);
+    color: white;
+    padding: 24px 40px 20px;
+    border-bottom: 4px solid var(--usc-gold);
+  }
+  header .institution {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 6px;
+  }
+  header h1 {
+    font-size: 26px;
+    font-weight: normal;
+    line-height: 1.2;
+  }
+  header .byline {
+    font-size: 13px;
+    opacity: 0.8;
+    margin-top: 6px;
+    font-style: italic;
+  }
+  header .tagline {
+    margin-top: 10px;
+    font-size: 13px;
+    opacity: 0.75;
+    font-family: 'Arial', sans-serif;
+    max-width: 680px;
+  }
+
+  /* ── LEGEND ── */
+  .legend-bar {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    padding: 10px 40px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+  }
+  .legend-bar .legend-label { color: var(--muted); font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    display: inline-block;
+  }
+  .dot-strong { background: var(--strong); }
+  .dot-emerging { background: var(--emerging); }
+  .dot-gap { background: var(--gap); }
+
+  /* ── TABS / FILTER ── */
+  .controls {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+  }
+  .tab-btn {
+    padding: 14px 18px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    color: var(--muted);
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: all 0.15s;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--usc-cardinal); border-bottom-color: var(--usc-cardinal); font-weight: bold; }
+
+  .filter-bar {
+    background: #fafafa;
+    border-bottom: 1px solid var(--border);
+    padding: 10px 40px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .filter-bar label { font-family: 'Arial', sans-serif; font-size: 12px; color: var(--muted); }
+  .filter-btn {
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: white;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: 'Arial', sans-serif;
+    transition: all 0.15s;
+  }
+  .filter-btn.active-strong { background: var(--strong); color: white; border-color: var(--strong); }
+  .filter-btn.active-emerging { background: var(--emerging); color: white; border-color: var(--emerging); }
+  .filter-btn.active-gap { background: var(--gap); color: white; border-color: var(--gap); }
+
+  /* ── MAIN LAYOUT ── */
+  .main { padding: 30px 40px; max-width: 1200px; }
+
+  /* ── VIEW: FRAMEWORK OVERVIEW ── */
+  #view-overview { display: block; }
+  #view-topics, #view-la, #view-gaps { display: none; }
+
+  .overview-intro {
+    max-width: 720px;
+    margin-bottom: 30px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #333;
+  }
+  .overview-intro strong { color: var(--usc-cardinal); }
+
+  .framework-diagram {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 800px;
+    position: relative;
+  }
+
+  .framework-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 8px;
+    align-items: stretch;
+  }
+
+  .framework-block {
+    flex: 1;
+    border-radius: 8px;
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid transparent;
+    position: relative;
+  }
+  .framework-block:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  }
+  .framework-block .block-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 4px;
+  }
+  .framework-block .block-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+  .framework-block .block-desc {
+    font-size: 12px;
+    opacity: 0.85;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.4;
+  }
+  .framework-block .block-stats {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .stat-pill {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.3);
+    font-weight: bold;
+  }
+
+  .framework-block.crosscutting {
+    flex: 0.4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    writing-mode: horizontal-tb;
+  }
+
+  /* Arrow connector */
+  .arrow-connector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    color: #aaa;
+    font-size: 18px;
+  }
+
+  /* Middle row — experience + prevention side by side */
+  .middle-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 8px;
+    align-items: stretch;
+  }
+
+  /* Evidence heatmap in overview */
+  .evidence-heatmap {
+    margin-top: 30px;
+    max-width: 800px;
+  }
+  .heatmap-title {
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+  .heatmap-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+  }
+  .heatmap-cell {
+    background: white;
+    border-radius: 6px;
+    padding: 12px 14px;
+    border-left: 4px solid transparent;
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .heatmap-cell:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+  .heatmap-cell .cell-section { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+  .heatmap-cell .cell-q { font-size: 12px; color: var(--text); line-height: 1.4; }
+  .heatmap-cell.status-strong { border-left-color: var(--strong); }
+  .heatmap-cell.status-emerging { border-left-color: var(--emerging); }
+  .heatmap-cell.status-gap { border-left-color: var(--gap); }
+
+  /* ── VIEW: ALL TOPICS ── */
+  .section-header {
+    margin: 30px 0 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-header h2 {
+    font-size: 20px;
+    font-weight: normal;
+  }
+  .section-header .section-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .section-header .section-desc {
+    font-size: 13px;
+    color: var(--muted);
+    font-family: 'Arial', sans-serif;
+    margin-top: 4px;
+    max-width: 640px;
+  }
+
+  .topic-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 10px;
+  }
+
+  .topic-card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 18px 20px;
+    border: 1px solid var(--border);
+    border-top: 4px solid transparent;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .topic-card:hover {
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+    transform: translateY(-1px);
+  }
+  .topic-card.status-strong { border-top-color: var(--strong); }
+  .topic-card.status-emerging { border-top-color: var(--emerging); }
+  .topic-card.status-gap { border-top-color: var(--gap); }
+  .topic-card.hidden { display: none; }
+
+  .card-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+  .card-status.strong { color: var(--strong); }
+  .card-status.emerging { color: var(--emerging); }
+  .card-status.gap { color: var(--gap); }
+
+  .card-question {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.4;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  .card-summary {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.55;
+    font-family: 'Arial', sans-serif;
+  }
+  .card-gap {
+    margin-top: 10px;
+    padding: 8px 10px;
+    background: #fff5f5;
+    border-left: 3px solid var(--gap);
+    border-radius: 3px;
+    font-size: 12px;
+    color: #666;
+    font-family: 'Arial', sans-serif;
+  }
+  .card-gap .gap-label { font-weight: bold; color: var(--gap); }
+  .card-tags {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .tag {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: #f0f0f0;
+    color: #555;
+  }
+  .card-citations {
+    margin-top: 10px;
+    border-top: 1px solid var(--border);
+    padding-top: 8px;
+  }
+  .cite-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .cite-item {
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    color: var(--usc-cardinal);
+    margin-bottom: 2px;
+  }
+  .hpri-badge {
+    display: inline-block;
+    font-size: 10px;
+    background: var(--usc-cardinal);
+    color: white;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-family: 'Arial', sans-serif;
+    vertical-align: middle;
+    margin-left: 4px;
+  }
+
+  /* ── VIEW: LA CONTEXT ── */
+  .la-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .la-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px 22px;
+    border: 1px solid var(--border);
+  }
+  .la-card h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: var(--usc-cardinal);
+  }
+  .la-card p {
+    font-size: 13px;
+    color: #444;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+  }
+  .la-stat {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--usc-cardinal);
+    margin: 8px 0 2px;
+    font-family: 'Arial', sans-serif;
+  }
+  .la-stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'Arial', sans-serif;
+  }
+  .coverage-grid {
+    margin-top: 20px;
+  }
+  .coverage-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .coverage-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .covered { background: #e8f5e9; }
+  .partial { background: #fff3e0; }
+  .uncovered { background: #fce4ec; }
+  .coverage-text h4 { font-size: 14px; margin-bottom: 3px; }
+  .coverage-text p { font-size: 13px; color: #555; font-family: 'Arial', sans-serif; line-height: 1.5; }
+
+  /* ── VIEW: GAPS ── */
+  .gap-section {
+    background: white;
+    border-radius: 8px;
+    padding: 22px 24px;
+    border: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+  .gap-section h3 {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+  .gap-section .priority-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--gap);
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .gap-section p {
+    font-size: 13px;
+    color: #444;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+  .hpri-note {
+    background: #fff9e6;
+    border-left: 3px solid var(--usc-gold);
+    padding: 8px 12px;
+    border-radius: 3px;
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    color: #555;
+    margin-top: 8px;
+  }
+  .hpri-note strong { color: var(--usc-cardinal); }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 100;
+    padding: 40px 20px;
+    overflow-y: auto;
+  }
+  .modal-overlay.open { display: flex; justify-content: center; align-items: flex-start; }
+  .modal {
+    background: white;
+    border-radius: 10px;
+    max-width: 680px;
+    width: 100%;
+    padding: 32px 36px;
+    position: relative;
+  }
+  .modal-close {
+    position: absolute;
+    top: 16px; right: 20px;
+    font-size: 22px;
+    cursor: pointer;
+    color: var(--muted);
+    border: none;
+    background: none;
+    line-height: 1;
+  }
+  .modal-close:hover { color: var(--text); }
+  .modal h2 { font-size: 20px; line-height: 1.3; margin-bottom: 6px; }
+  .modal .modal-section { font-family: 'Arial', sans-serif; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px; }
+  .modal .modal-summary { font-size: 14px; line-height: 1.7; color: #333; margin-bottom: 16px; }
+  .modal .modal-gap { background: #fff5f5; border-left: 3px solid var(--gap); padding: 12px 14px; border-radius: 3px; margin-bottom: 16px; }
+  .modal .modal-gap .label { font-weight: bold; color: var(--gap); font-family: 'Arial', sans-serif; font-size: 12px; text-transform: uppercase; margin-bottom: 4px; }
+  .modal .modal-gap p { font-family: 'Arial', sans-serif; font-size: 13px; color: #555; }
+  .modal .modal-cites h4 { font-family: 'Arial', sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); margin-bottom: 8px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #f0f0ee;
+    border-top: 1px solid var(--border);
+    padding: 20px 40px;
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 40px;
+  }
+  footer a { color: var(--usc-cardinal); text-decoration: none; }
+
+
+  /* ── CATALOGUE PAPERS ── */
+  .catalogue-section { margin-top: 20px; border-top: 1px solid var(--border); padding-top: 14px; }
+  .catalogue-header { font-family: 'Arial', sans-serif; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); margin-bottom: 10px; }
+  .catalogue-row { display: flex; align-items: flex-start; gap: 10px; padding: 8px 10px; border-radius: 6px; cursor: pointer; transition: background 0.15s; border: 1px solid transparent; margin-bottom: 4px; }
+  .catalogue-row:hover { background: #f5f8ff; border-color: #d0e0f0; }
+  .cat-year { font-family: 'Arial', sans-serif; font-size: 12px; font-weight: bold; color: var(--usc-cardinal); min-width: 36px; padding-top: 2px; }
+  .cat-meta { flex: 1; }
+  .cat-title { font-family: 'Arial', sans-serif; font-size: 13px; color: var(--text); line-height: 1.4; margin-bottom: 2px; }
+  .cat-author { font-family: 'Arial', sans-serif; font-size: 11px; color: var(--muted); }
+  .cat-arrow { font-size: 14px; color: #aaa; padding-top: 2px; }
+  .cat-more { font-family: 'Arial', sans-serif; font-size: 12px; color: var(--usc-cardinal); text-align: center; padding: 8px 0 2px; font-style: italic; }
+
+  @media (max-width: 700px) {
+    header { padding: 16px 20px; }
+    .main { padding: 20px; }
+    .topic-grid { grid-template-columns: 1fr; }
+    .la-grid { grid-template-columns: 1fr; }
+    .heatmap-grid { grid-template-columns: 1fr; }
+    .controls { padding: 0 20px; }
+    .legend-bar { padding: 10px 20px; }
+    .filter-bar { padding: 10px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="institution">HPRI · Homelessness Policy Research Institute &nbsp;·&nbsp; USC Suzanne Dworak-Peck School of Social Work</div>
+  <h1>Understanding Homelessness: A Research Framework</h1>
+  <div class="byline">Benjamin F. Henwood, PhD, MSW</div>
+  <div class="tagline">Mapping what we know, what is emerging, and where the evidence gaps are—across the full spectrum of homelessness research.</div>
+</header>
+
+<!-- LEGEND -->
+<div class="legend-bar">
+  <span class="legend-label">Evidence Status:</span>
+  <span class="legend-item"><span class="legend-dot dot-strong"></span> Strong evidence</span>
+  <span class="legend-item"><span class="legend-dot dot-emerging"></span> Emerging evidence</span>
+  <span class="legend-item"><span class="legend-dot dot-gap"></span> Evidence gap</span>
+</div>
+
+<!-- TABS -->
+<div class="controls">
+  <button class="tab-btn active" onclick="showView('overview', this)">Framework Overview</button>
+  <button class="tab-btn" onclick="showView('topics', this)">All Research Topics</button>
+  <button class="tab-btn" onclick="showView('la', this)">Los Angeles Context</button>
+  <button class="tab-btn" onclick="showView('gaps', this)">Priority Gaps</button>
+</div>
+
+<!-- FILTER BAR (shown in topics view) -->
+<div class="filter-bar" id="filter-bar" style="display:none;">
+  <span class="filter-bar"><label>Filter by evidence status:</label></span>
+  <button class="filter-btn" id="filter-all" onclick="filterTopics('all', this)">All topics</button>
+  <button class="filter-btn" id="filter-strong" onclick="filterTopics('strong', this)">Strong evidence</button>
+  <button class="filter-btn" id="filter-emerging" onclick="filterTopics('emerging', this)">Emerging</button>
+  <button class="filter-btn" id="filter-gap" onclick="filterTopics('gap', this)">Gaps</button>
+</div>
+
+<!-- ═══════════════════════════════════ -->
+<!-- VIEW: FRAMEWORK OVERVIEW           -->
+<!-- ═══════════════════════════════════ -->
+<div class="main" id="view-overview">
+
+  <p class="overview-intro">
+    Homelessness is poorly understood not because the evidence is lacking, but because the <strong>evidence is fragmented</strong>. This framework integrates research across four causal layers, an empirical domain, and cross-cutting prevention—connecting structural causes to individual outcomes. Click any section to explore the research.
+  </p>
+
+  <div class="framework-diagram">
+
+    <!-- Layer 1 -->
+    <div class="framework-row">
+      <div class="framework-block" style="background: var(--layer1); color: white;" onclick="showSection('layer1')">
+        <div class="block-label">Layer 1</div>
+        <div class="block-title">Public Attitudes & Political Will</div>
+        <div class="block-desc">How public understanding and political choices shape what interventions are possible. The feedback loop: evidence builds will, will funds evidence.</div>
+        <div class="block-stats">
+          <span class="stat-pill">4 topics</span>
+          <span class="stat-pill">⚠ Mostly gaps</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="arrow-connector">↓</div>
+
+    <!-- Layer 2 -->
+    <div class="framework-row">
+      <div class="framework-block" style="background: var(--layer2); color: white;" onclick="showSection('layer2')">
+        <div class="block-label">Layer 2</div>
+        <div class="block-title">Structural Conditions</div>
+        <div class="block-desc">Racial inequality, housing scarcity, wage stagnation, policy failures. Creates vulnerability—not homelessness directly. Universal prevention begins here.</div>
+        <div class="block-stats">
+          <span class="stat-pill">4 topics</span>
+          <span class="stat-pill">✓ Strong evidence</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="arrow-connector">↓</div>
+
+    <!-- Layer 3 + Prevention side by side -->
+    <div class="middle-row">
+      <div class="framework-block" style="background: var(--layer3); color: white; flex: 2;" onclick="showSection('layer3')">
+        <div class="block-label">Layer 3</div>
+        <div class="block-title">Pathways into Homelessness</div>
+        <div class="block-desc">System failures (foster care, criminal justice, behavioral health) and societal barriers (discrimination, income gaps, social isolation) that convert vulnerability to homelessness.</div>
+        <div class="block-stats">
+          <span class="stat-pill">6 topics</span>
+          <span class="stat-pill">Mixed evidence</span>
+        </div>
+      </div>
+      <div class="framework-block crosscutting" style="background: var(--prevention); color: white;" onclick="showSection('prevention')">
+        <div class="block-label">Cross-Cutting</div>
+        <div class="block-title">Prevention</div>
+        <div class="block-desc">Operates at all levels—from structural investment to targeted crisis diversion. Consistently underfunded.</div>
+        <div class="block-stats">
+          <span class="stat-pill">3 topics</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="arrow-connector">↓</div>
+
+    <!-- Experience of Homelessness -->
+    <div class="framework-row">
+      <div class="framework-block" style="background: var(--experience); color: white;" onclick="showSection('experience')">
+        <div class="block-label">Empirical Domain</div>
+        <div class="block-title">The Experience of Homelessness</div>
+        <div class="block-desc">Who experiences homelessness, health and aging trajectories, housing trajectories over time, social connection and service engagement. Makes the invisible visible.</div>
+        <div class="block-stats">
+          <span class="stat-pill">5 topics</span>
+          <span class="stat-pill">PATHS study</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="arrow-connector">↓</div>
+
+    <!-- Layer 4 -->
+    <div class="framework-row">
+      <div class="framework-block" style="background: var(--layer4); color: white;" onclick="showSection('layer4')">
+        <div class="block-label">Layer 4</div>
+        <div class="block-title">Institutional & Community Response</div>
+        <div class="block-desc">Formal services (outreach, coordinated entry, housing), adjacent systems (healthcare, criminal justice, schools, faith organizations), and community-based response (mutual aid, peer support).</div>
+        <div class="block-stats">
+          <span class="stat-pill">7 topics</span>
+          <span class="stat-pill">Housing First ✓</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="arrow-connector">↓</div>
+
+    <!-- Outcomes -->
+    <div class="framework-row">
+      <div class="framework-block" style="background: var(--outcomes); color: white;" onclick="showSection('outcomes')">
+        <div class="block-label">Outcomes</div>
+        <div class="block-title">Individual & Community Outcomes</div>
+        <div class="block-desc">Housing stability, health recovery, dignity and agency. Plus: safer public spaces, reduced costs, reduced racial inequity. Outcomes feed back into Layer 1—visible progress builds political will.</div>
+        <div class="block-stats">
+          <span class="stat-pill">3 topics</span>
+          <span class="stat-pill">↺ Feedback loop</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /framework-diagram -->
+
+  <!-- Evidence heatmap -->
+  <div class="evidence-heatmap">
+    <div class="heatmap-title">Selected Topics by Evidence Status — click to explore</div>
+    <div class="heatmap-grid" id="heatmap-cells">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+
+</div><!-- /view-overview -->
+
+
+<!-- ═══════════════════════════════════ -->
+<!-- VIEW: ALL TOPICS                   -->
+<!-- ═══════════════════════════════════ -->
+<div class="main" id="view-topics">
+
+  <div id="sections-container">
+    <!-- Populated by JS -->
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════ -->
+<!-- VIEW: LOS ANGELES CONTEXT          -->
+<!-- ═══════════════════════════════════ -->
+<div class="main" id="view-la">
+
+  <div class="la-grid">
+    <div class="la-card">
+      <h3>Scale of the Challenge</h3>
+      <div class="la-stat">52,000+</div>
+      <div class="la-stat-label">People unsheltered in LA County on any given night — the largest unsheltered population in the US</div>
+      <p style="margin-top:12px;">LA has some of the highest rents and lowest housing vacancy rates nationally, a history of racially discriminatory housing policy, and one of the widest wage-to-housing-cost gaps in the country.</p>
+    </div>
+    <div class="la-card">
+      <h3>Racial Disparity</h3>
+      <div class="la-stat">8% → 30%+</div>
+      <div class="la-stat-label">Black residents: 8% of county population, 30%+ of homeless population</div>
+      <p style="margin-top:12px;">This disparity is not incidental. It is the direct expression of structural conditions—redlining, discriminatory lending, over-policing, and barriers to employment and wealth accumulation.</p>
+    </div>
+    <div class="la-card">
+      <h3>2025 Point-in-Time Count</h3>
+      <div class="la-stat">2.8%↓</div>
+      <div class="la-stat-label">CA decline in homelessness (2024–2025); first national decline since 2016</div>
+      <p style="margin-top:12px;">California officials attribute decline to Homekey, HHAP, and Encampment Resolution Funds. HUD's new NOFO moves away from Housing First despite this evidence. 19 states including CA are suing.</p>
+    </div>
+    <div class="la-card">
+      <h3>Measure A / Evaluation Agenda</h3>
+      <p>LA County's 2024 Measure A created a dedicated homelessness funding stream and 16-priority Annual Evaluation Agenda. It covers Layer 4 (formal response system) in depth. But it leaves significant gaps in the full framework.</p>
+    </div>
+  </div>
+
+  <div style="margin-top:30px;">
+    <div class="section-header">
+      <div class="section-label">Evaluation Infrastructure</div>
+      <h2>What Current Systems Cover — and Don't</h2>
+      <div class="section-desc">Measure A/AEA and LACAHSA represent significant advances but do not cover the full framework.</div>
+    </div>
+
+    <div class="coverage-grid">
+      <div class="coverage-row">
+        <div class="coverage-icon covered">✓</div>
+        <div class="coverage-text">
+          <h4>Covered: Formal Response System (Layer 4)</h4>
+          <p>Measure A/AEA evaluates systemwide impact, racial disparities in housing stability, coordinated entry, outreach engagement, and workforce conditions. Deep coverage of the formal homeless services system.</p>
+        </div>
+      </div>
+      <div class="coverage-row">
+        <div class="coverage-icon covered">✓</div>
+        <div class="coverage-text">
+          <h4>Covered: Housing Supply (Layer 2, partial)</h4>
+          <p>LACAHSA addresses affordable housing production, eviction diversion, and affordable stock preservation—operating in structural conditions and targeted prevention domains.</p>
+        </div>
+      </div>
+      <div class="coverage-row">
+        <div class="coverage-icon partial">~</div>
+        <div class="coverage-text">
+          <h4>Partial: Pathways (Layer 3)</h4>
+          <p>Some attention to referral pathways from foster care, criminal justice, and behavioral health through coordinated entry evaluations—but preventing these systems from producing homelessness requires policy change outside homelessness funding streams.</p>
+        </div>
+      </div>
+      <div class="coverage-row">
+        <div class="coverage-icon uncovered">✗</div>
+        <div class="coverage-text">
+          <h4>Not Covered: Structural Conditions (Layer 2)</h4>
+          <p>Racial and economic inequality, wage stagnation, macro-level policy failures are largely outside both Measure A and LACAHSA scope. No evaluation of housing supply dynamics or structural drivers of racial disparity at macro level.</p>
+        </div>
+      </div>
+      <div class="coverage-row">
+        <div class="coverage-icon uncovered">✗</div>
+        <div class="coverage-text">
+          <h4>Not Covered: Adjacent Institutional Systems</h4>
+          <p>Healthcare, criminal justice, and schools shape homelessness trajectories but are not funded through homelessness-specific streams and rarely included in official evaluations.</p>
+        </div>
+      </div>
+      <div class="coverage-row">
+        <div class="coverage-icon uncovered">✗</div>
+        <div class="coverage-text">
+          <h4>Not Covered: Community Response</h4>
+          <p>Mutual aid, faith organizations, and peer support are largely invisible to official evaluations—not captured in HMIS, rarely included in RFP processes. The faith-based sector in particular has significant land assets and community trust that formal systems cannot replicate.</p>
+        </div>
+      </div>
+      <div class="coverage-row">
+        <div class="coverage-icon uncovered">✗</div>
+        <div class="coverage-text">
+          <h4>Not Covered: Public Attitudes (Layer 1)</h4>
+          <p>No current evaluation effort addresses public narratives, community trust, or political will—despite being the foundational condition on which all other investments depend.</p>
+        </div>
+      </div>
+      <div class="coverage-row">
+        <div class="coverage-icon uncovered">✗</div>
+        <div class="coverage-text">
+          <h4>Not Covered: Prevention (structural level)</h4>
+          <p>Prevention remains significantly underfunded relative to its ROI, at both the structural (affordable housing, income support) and targeted (eviction diversion, rapid rehousing) levels.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════ -->
+<!-- VIEW: PRIORITY GAPS                -->
+<!-- ═══════════════════════════════════ -->
+<div class="main" id="view-gaps">
+
+  <div class="section-header">
+    <div class="section-label">Evidence Gaps</div>
+    <h2>Where the Research is Most Needed</h2>
+    <div class="section-desc">These are the highest-priority areas where current evidence is insufficient to guide policy—and where HPRI is positioned to contribute.</div>
+  </div>
+
+  <div class="gap-section">
+    <div class="priority-label">Critical Gap · Layer 1</div>
+    <h3>Public Attitudes and Political Will</h3>
+    <p>The foundational layer of the framework receives almost no systematic research attention. We lack rigorous evidence on what messaging strategies effectively shift public opinion toward systemic framing, how attitudes drive policy investment decisions, or how to build durable political coalitions for sustained homelessness investment.</p>
+    <p>This is not merely an academic gap. The current federal retreat from Housing First is driven partly by political framing, not evidence. Understanding and countering that framing requires its own evidence base.</p>
+    <div class="hpri-note"><strong>HPRI opportunity:</strong> Research on narrative and framing effects, public opinion polling, and the political economy of homelessness investment. Connects directly to Layer 1-Layer 2 feedback loop.</div>
+  </div>
+
+  <div class="gap-section">
+    <div class="priority-label">Critical Gap · Empirical Domain</div>
+    <h3>Population-Representative Data on the Unsheltered</h3>
+    <p>Point-in-time counts are methodologically limited, particularly for unsheltered populations. Longitudinal, population-representative data on health trajectories, housing trajectories, and social connection during homelessness is extremely rare.</p>
+    <p>PATHS (Periodic Assessment of Trajectories of Housing, Health, and Homelessness) is one of very few such studies nationally. Expanding and sustaining this kind of data infrastructure is essential for everything else in this framework.</p>
+    <div class="hpri-note"><strong>HPRI contribution:</strong> PATHS study directly addresses this gap. HUD NOFO (Topic G) application would further advance alternative enumeration methods.</div>
+  </div>
+
+  <div class="gap-section">
+    <div class="priority-label">Critical Gap · Outcomes</div>
+    <h3>Whether Interventions Are Reducing Racial Disparities</h3>
+    <p>Racial disparities in homelessness entry are well-documented, but we know very little about whether current interventions differentially benefit or fail Black, AIAN, and other overrepresented groups. Racially disaggregated outcome data is improving but still limited.</p>
+    <div class="hpri-note"><strong>HPRI contribution:</strong> CAIS/CESTTRR partnership (Eric Rice, USC) advances race equity measurement. PATHS provides racially disaggregated longitudinal data.</div>
+  </div>
+
+  <div class="gap-section">
+    <div class="priority-label">Critical Gap · Layer 4</div>
+    <h3>Community-Based and Faith-Based Response</h3>
+    <p>Mutual aid networks, faith organizations, and peer support reach people and build trust in ways formal institutions cannot—often ahead of the formal system. Yet this component is almost entirely absent from HMIS, excluded from RFP processes, and rarely evaluated.</p>
+    <p>Faith-based organizations in particular hold significant land assets and long-term community relationships that cannot be replicated by government systems. The evidence base for their role and effectiveness is nearly nonexistent.</p>
+    <div class="hpri-note"><strong>HPRI contribution:</strong> USC Housing LA Faith-Based Research Initiative (Seth Pickens/HPRI; Hyepin Im/FACE; NDSC, CRCC partners) is directly building this evidence base—mapping faith-based land assets and community engagement capacity across LA.</div>
+  </div>
+
+  <div class="gap-section">
+    <div class="priority-label">Critical Gap · Layer 4</div>
+    <h3>Workforce Conditions and Provider Stability</h3>
+    <p>High turnover, low wages, and inadequate support among frontline providers are recognized but almost entirely unevaluated. Frontline workers are often from the same communities as clients; some are themselves at homelessness risk. Workforce instability is both an equity issue and a service quality issue.</p>
+    <div class="hpri-note"><strong>HPRI opportunity:</strong> Measure A's AEA includes workforce as an evaluation priority—creating an opening for HPRI to contribute rigorous research in this understudied area.</div>
+  </div>
+
+  <div class="gap-section">
+    <div class="priority-label">Critical Gap · Layer 3</div>
+    <h3>Scale and Adequacy of Investment</h3>
+    <p>Research consistently shows that homelessness declines when investment is adequate—and rises when it isn't. Yet the field lacks a clear, evidence-based benchmark for what "adequate investment" looks like per person experiencing homelessness. Without this, debates about funding remain politically driven rather than evidence-based.</p>
+    <p>LA currently invests approximately $17K per person experiencing homelessness annually; evidence suggests $40K+ is required for durable housing stability. The gap between current and adequate investment is itself a research and policy question.</p>
+    <div class="hpri-note"><strong>HPRI contribution:</strong> "You Get What You Pay For" policy brief establishes the adequacy framework. Transparency about what current investment levels can realistically achieve—and what they cannot—is a distinctive HPRI contribution to the field.</div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════ -->
+<!-- MODAL                              -->
+<!-- ═══════════════════════════════════ -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOnOverlay(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Homelessness Policy Research Institute (HPRI)</strong> · USC Suzanne Dworak-Peck School of Social Work ·
+  <a href="https://hpri.usc.edu" target="_blank">hpri.usc.edu</a>
+  &nbsp;|&nbsp; Framework: Benjamin F. Henwood, PhD, MSW &nbsp;|&nbsp; v1.0 · June 2026
+</footer>
+
+
+<script>
+// ═══════════════════════════════════
+// DATA
+// ═══════════════════════════════════
+const sections = [
+  {
+    id: "layer1",
+    label: "Layer 1",
+    title: "Public Attitudes & Political Will",
+    color: "#5B4FCF",
+    desc: "How public understanding and political choices shape what interventions are possible. The feedback loop: evidence builds will, will funds evidence.",
+    topics: [
+      { id:"l1-t1", question:"How do public attitudes toward homelessness form and change?", status:"emerging",
+        summary:"Research on stigma, framing effects, and narrative change is growing but underdeveloped in the homelessness context. Communication and media framing studies show attitudes are malleable—but we lack homelessness-specific evidence on what actually shifts them.",
+        gap:"Little rigorous research on what messaging strategies most effectively shift public opinion toward systemic framing of homelessness.", tags:["public opinion","stigma","narrative","media"], cites:[] },
+      { id:"l1-t2", question:"What is the relationship between public opinion and homelessness policy outcomes?", status:"gap",
+        summary:"The feedback loop between public attitudes and policy investment is theorized but rarely studied empirically in the homelessness domain. Understanding this link is essential to building durable political support for evidence-based approaches.",
+        gap:"No systematic evidence on how attitudes drive or constrain homelessness funding decisions at local, state, or federal level.", tags:["political will","policy","feedback loop"], cites:[] },
+      { id:"l1-t3", question:"How does stigma drive criminalization policies—sweeps, anti-camping ordinances?", status:"strong",
+        summary:"Evidence is consistent: criminalization policies do not reduce homelessness and often worsen health and housing outcomes. They persist largely because they respond to public discomfort rather than evidence. Recent Supreme Court decision (Grants Pass) may expand criminalization despite this evidence.",
+        gap:"Strong evidence on ineffectiveness of criminalization; weaker evidence on how to effectively build political opposition to these policies.", tags:["criminalization","sweeps","anti-camping","stigma"], cites:[] },
+      { id:"l1-t4", question:"How do community benefits of addressing homelessness affect political support?", status:"emerging",
+        summary:"Framing homelessness as a public investment with returns for all—cost savings, safer public spaces, reduced racial inequity—may build broader political coalitions. Cost-of-homelessness studies provide partial evidence.",
+        gap:"Limited research on how community-benefit framing influences political will compared to charitable/needs-based framing.", tags:["community outcomes","framing","cost savings"], cites:[] }
+    ]
+  },
+  {
+    id: "layer2",
+    label: "Layer 2",
+    title: "Structural Conditions",
+    color: "#C0392B",
+    desc: "Racial inequality, housing scarcity, wage stagnation, and policy failures create vulnerability—not homelessness directly. Universal prevention begins here.",
+    topics: [
+      { id:"l2-t1", question:"How does housing market scarcity drive homelessness rates?", status:"strong",
+        summary:"Colburn and Aldern (2022) and others demonstrate that housing market conditions—vacancy rates, rent levels, cost burden—are the strongest structural predictors of homelessness rates across jurisdictions. LA has among the worst housing conditions nationally.",
+        gap:"Strong cross-sectional evidence; less longitudinal work on how supply changes affect homelessness rates over time.", tags:["housing market","affordability","supply"], cites:[{authors:"Colburn & Aldern",year:2022,title:"Homelessness Is a Housing Problem"}] },
+      { id:"l2-t2", question:"How do racial and economic inequalities produce racial disparities in homelessness?", status:"strong",
+        summary:"Black residents are 8% of LA County population but 30%+ of homeless population. Historical exclusion through redlining, discriminatory lending, and unequal access to education and employment has produced structural vulnerability that manifests as racial disparity.",
+        gap:"Descriptive disparity evidence is very strong; causal pathway research linking specific structural factors to present-day disparities is less developed.", tags:["racial disparity","redlining","structural racism"], cites:[{authors:"Geronimus",year:1992,title:"Weathering hypothesis and cumulative disadvantage"}] },
+      { id:"l2-t3", question:"How does wage stagnation and income inadequacy contribute to housing instability?", status:"strong",
+        summary:"For lowest-income workers, wages have not kept pace with housing costs, leaving millions of households one crisis away from instability. NLIHC documents the wage required to afford a 2-BR unit in every state—LA is among the most extreme.",
+        gap:"Macro-level evidence is strong; less research on how marginal income changes affect homelessness risk at the individual level.", tags:["wages","income","affordability","poverty"], cites:[{authors:"NLIHC",year:2024,title:"Out of Reach"}] },
+      { id:"l2-t4", question:"How have federal and state policy decisions eroded the housing safety net?", status:"strong",
+        summary:"Disinvestment in public housing, zoning barriers to multifamily construction, inadequate behavioral health infrastructure, and underfunded income support programs produced the 7.2M affordable home deficit. HUD's budget dropped ~50% in real terms from 1978–2000 while homelessness tripled.",
+        gap:"Historical and policy analysis is well-documented; counterfactual modeling of alternative policy trajectories is rare.", tags:["public housing","policy failure","disinvestment"], cites:[{authors:"NLIHC",year:2024,title:"The Gap Report"}] }
+    ]
+  },
+  {
+    id: "layer3",
+    label: "Layer 3",
+    title: "Pathways into Homelessness",
+    color: "#E67E22",
+    desc: "System failures and societal barriers that convert structural vulnerability into actual homelessness.",
+    topics: [
+      { id:"l3-t1", question:"How does the foster care system produce homelessness among youth?", status:"strong",
+        summary:"Youth aging out of foster care face some of the highest homelessness risk of any population. Research consistently documents lack of housing, income, and social support at transition and the strong association with subsequent homelessness.",
+        gap:"Evidence is strong on risk; less evidence on which transition supports are most effective at preventing homelessness.", tags:["youth","foster care","aging out"], cites:[] },
+      { id:"l3-t2", question:"How does the criminal justice system contribute to homelessness?", status:"strong",
+        summary:"People released from incarceration face compounding barriers: criminal records, loss of benefits (including housing), abrupt community transitions without support. The association between incarceration and subsequent homelessness is well-documented.",
+        gap:"Less evidence on which reentry supports most effectively prevent homelessness; limited data on the reverse pathway.", tags:["criminal justice","incarceration","reentry"], cites:[] },
+      { id:"l3-t3", question:"How does the behavioral health system (including deinstitutionalization) produce homelessness?", status:"strong",
+        summary:"The legacy of deinstitutionalization combined with inadequate community mental health infrastructure has produced a persistent pipeline from psychiatric crisis to homelessness. The association between serious mental illness and homelessness is well-documented.",
+        gap:"Descriptive evidence very strong; less evidence on which specific system-level changes would break the pipeline.", tags:["behavioral health","mental illness","deinstitutionalization"], cites:[] },
+      { id:"l3-t4", question:"How do housing and employment discrimination convert vulnerability to homelessness?", status:"emerging",
+        summary:"Persistent discrimination in housing and employment markets leaves vulnerable people—particularly Black, AIAN, and formerly incarcerated individuals—without effective safety nets even when other supports are nominally available.",
+        gap:"Evidence of discrimination is strong; specific pathways from discrimination to homelessness entry are less studied.", tags:["discrimination","housing","employment"], cites:[] },
+      { id:"l3-t5", question:"What role do absent or weak social support networks play in homelessness pathways?", status:"emerging",
+        summary:"Social isolation and lack of informal support networks are associated with both homelessness entry and difficulty exiting. Social connection is both a protective factor and a resource that homelessness itself erodes.",
+        gap:"Conceptually well-understood; less rigorous quantitative evidence on the independent contribution of social isolation.", tags:["social support","isolation","protective factors"], cites:[] },
+      { id:"l3-t6", question:"What is the cross-cutting role of schools in pathways and prevention?", status:"emerging",
+        summary:"Schools can be a pathway (failure to identify at-risk youth) or a prevention site (McKinney-Vento supports). For families experiencing homelessness, they are a key point of connection to the response system.",
+        gap:"Role is well-recognized but under-evaluated; limited rigorous evidence on effectiveness of school-based homelessness prevention.", tags:["schools","youth","McKinney-Vento","families"], cites:[] }
+    ]
+  },
+  {
+    id: "prevention",
+    label: "Prevention",
+    title: "Prevention: A Cross-Cutting Imperative",
+    color: "#27AE60",
+    desc: "Prevention operates at all layers—from structural investment to targeted crisis diversion. Consistently underfunded relative to its ROI.",
+    topics: [
+      { id:"prev-t1", question:"What is the return on investment of homelessness prevention vs. response?", status:"strong",
+        summary:"Research consistently demonstrates that preventing homelessness is substantially less expensive than addressing it after the fact. Cost analyses of eviction diversion, rapid rehousing, and emergency rental assistance document high ROI.",
+        gap:"Evidence is strong overall; less work on cost-effectiveness comparisons across specific prevention program types.", tags:["prevention","cost-effectiveness","ROI"], cites:[{authors:"Culhane, Metraux & Byrne",year:2011,title:"Testing a typology of family homelessness"}] },
+      { id:"prev-t2", question:"Which targeted prevention interventions are most effective?", status:"emerging",
+        summary:"Eviction diversion programs, emergency rental assistance, and rapid rehousing show strong evidence. The key unresolved question: who to target with limited resources?",
+        gap:"Active area of research; better evidence on what works than on who to target with what intervention.", tags:["eviction diversion","rapid rehousing","targeting"], cites:[] },
+      { id:"prev-t3", question:"How can affordable housing investment function as universal homelessness prevention?", status:"strong",
+        summary:"Housing supply investment is the most upstream prevention available. Connections between housing market conditions and homelessness rates are well-established, supporting housing production as prevention.",
+        gap:"Macro-level evidence is strong; less evidence on which housing types and locations most effectively prevent homelessness specifically.", tags:["affordable housing","universal prevention","housing supply"], cites:[] }
+    ]
+  },
+  {
+    id: "experience",
+    label: "Empirical Domain",
+    title: "The Experience of Homelessness",
+    color: "#8E44AD",
+    desc: "Who experiences homelessness, health and aging trajectories, housing trajectories over time, social connection and service engagement.",
+    topics: [
+      { id:"exp-t1", question:"Who experiences homelessness? What are the demographics and how have they changed?", status:"emerging",
+        summary:"Point-in-time counts provide annual snapshots but are methodologically limited, particularly for unsheltered populations. PATHS and similar longitudinal studies provide richer population-representative data. Racial disproportionality is well-documented; other subpopulation patterns are less characterized.",
+        gap:"PIT counts are imprecise; better methods needed for unsheltered enumeration. Limited longitudinal population data.", tags:["demographics","PIT count","racial disparity","enumeration"], cites:[] },
+      { id:"exp-t2", question:"How does homelessness affect health—including accelerated aging and cumulative harm?", status:"strong",
+        summary:"Research on weathering and cumulative physiological harm from chronic exposure to adverse conditions is well-developed. People experiencing homelessness show health profiles decades older than chronological age. PATHS generates longitudinal data on this question for unsheltered Angelenos.",
+        gap:"Cross-sectional evidence is strong; less longitudinal data on trajectories and recovery after stable housing placement.", tags:["health","weathering","accelerated aging","chronic illness"], hpri:true,
+        cites:[{authors:"Geronimus",year:1992,title:"Weathering hypothesis"},{authors:"Henwood et al. (PATHS)",year:"ongoing",title:"Health trajectories in unsheltered populations — HPRI"}] },
+      { id:"exp-t3", question:"What are the housing trajectories of people experiencing homelessness over time?", status:"emerging",
+        summary:"PATHS documents patterns of cycling between unsheltered life, shelter, and short-term housing. Understanding trajectory patterns is essential for matching interventions to need and for evaluating whether systems are producing durable exits.",
+        gap:"Longitudinal population-representative data is rare and expensive to collect. PATHS is one of very few such studies nationally for unsheltered populations.", tags:["housing trajectories","chronic homelessness","cycling","PATHS"], hpri:true,
+        cites:[{authors:"Henwood et al. (PATHS)",year:"ongoing",title:"Housing trajectories — HPRI"}] },
+      { id:"exp-t4", question:"How do people experiencing homelessness engage (or not) with formal services?", status:"emerging",
+        summary:"Research on service engagement documents barriers including trust, trauma, discrimination, and organizational characteristics. Peer support and lived experience leadership improve engagement for people who don't connect with institutional services.",
+        gap:"Patterns of disengagement are documented; less rigorous evidence on which organizational and relational factors most reliably build trust.", tags:["service engagement","trust","trauma","peer support"], cites:[] },
+      { id:"exp-t5", question:"How is social connection maintained or lost during homelessness?", status:"gap",
+        summary:"Social isolation is recognized as both a cause and consequence of homelessness, but rigorous research on how social networks function during homelessness—and how they can be supported—is limited.",
+        gap:"Significant gap. Social connection is difficult to measure and rarely included in administrative data or formal evaluation.", tags:["social connection","isolation","networks"], cites:[] }
+    ]
+  },
+  {
+    id: "layer4",
+    label: "Layer 4",
+    title: "Institutional & Community Response",
+    color: "#2980B9",
+    desc: "The formal services system, adjacent institutional systems, and community-based response (including faith organizations and peer support).",
+    topics: [
+      { id:"l4-t1", question:"What is the comparative effectiveness of Housing First vs. other permanent housing models?", status:"strong",
+        summary:"Housing First is the most rigorously evaluated model in the field, with RCT and quasi-experimental evidence across multiple countries showing superior housing stability outcomes. Evidence for mental health, substance use, and quality of life outcomes is more mixed. Current federal policy retreats from Housing First despite this evidence.",
+        gap:"Strong evidence on housing stability; contested evidence on health/recovery outcomes. Active political debate despite empirical consensus.", tags:["Housing First","PSH","comparative effectiveness","RCT"], hpri:true,
+        cites:[{authors:"Tsemberis",year:2010,title:"Housing First: Ending Homelessness, Transforming Systems"},{authors:"Padgett, Henwood & Tsemberis",year:2016,title:"Housing First — Oxford University Press"}] },
+      { id:"l4-t2", question:"How effective is street outreach at engaging unsheltered people?", status:"emerging",
+        summary:"Outreach is widely practiced but inconsistently evaluated. Street medicine and clinically-informed outreach show promise for engaging people with high medical needs. HPRI has contributed research on street medicine as a bridge between the homeless services system and healthcare.",
+        gap:"Little rigorous evaluation of outreach models; most evidence is descriptive or from small studies.", tags:["outreach","street medicine","engagement","unsheltered"], hpri:true, cites:[] },
+      { id:"l4-t3", question:"How well does coordinated entry match people to appropriate interventions?", status:"emerging",
+        summary:"Coordinated entry systems vary widely in design and performance. Evidence on whether VI-SPDAT and similar prioritization tools are valid, reliable, and equitable is contested. Racial bias in prioritization tools is an active concern.",
+        gap:"Significant gap: limited evidence that current CE systems produce equitable or efficient matches. Tool validity and racial bias are active research questions.", tags:["coordinated entry","VI-SPDAT","prioritization","equity","racial bias"], cites:[] },
+      { id:"l4-t4", question:"What is the role and effectiveness of peer support and lived experience in the response system?", status:"emerging",
+        summary:"Evidence shows peer workers reach and engage people that institutional workers cannot. Peer support is increasingly embedded in formal systems. HPRI has contributed to this evidence base. Peer support bridges community response and the formal system—it belongs to both.",
+        gap:"Evidence is growing but largely small-scale; less evidence on how to implement peer support at system scale.", tags:["peer support","lived experience","workforce"], hpri:true, cites:[{authors:"Henwood et al.",year:"",title:"Peer support in permanent supportive housing — HPRI"}] },
+      { id:"l4-t5", question:"How do healthcare systems interact with homelessness? (EDs, hospitals, street medicine, medical respite)", status:"emerging",
+        summary:"Emergency departments and hospitals are de facto entry points for many people experiencing homelessness. Street medicine provides clinical care in encampments. Medical respite, hospital discharge planning, and medical-legal partnerships show promise.",
+        gap:"Evidence on street medicine and medical respite is growing but limited in scale and rigor.", tags:["healthcare","street medicine","hospital","medical respite"], cites:[] },
+      { id:"l4-t6", question:"What workforce conditions affect service quality and provider stability?", status:"gap",
+        summary:"High turnover, low wages, and inadequate support among frontline providers are recognized problems with equity implications. Frontline workers are often drawn from the same communities as clients; some are themselves at homelessness risk.",
+        gap:"Major gap: workforce conditions are almost entirely absent from formal homelessness evaluation. Measure A's AEA includes it, creating an opening.", tags:["workforce","turnover","wages","frontline","equity"], cites:[] },
+      { id:"l4-t7", question:"What is the role and effectiveness of mutual aid, faith organizations, and community-based response?", status:"gap",
+        summary:"Community-based response reaches people and builds trust in ways institutions cannot, often ahead of the formal system. Faith-based organizations hold significant land assets and long-term community relationships. Yet this component is almost entirely absent from HMIS and official evaluation.",
+        gap:"Critical gap: almost no rigorous evaluation of community/faith-based response. Not counted in HMIS, rarely included in RFP processes. HPRI's faith-based initiative is directly building this evidence base.", tags:["mutual aid","faith organizations","community response","Housing LA"], hpri:true, cites:[] }
+    ]
+  },
+  {
+    id: "outcomes",
+    label: "Outcomes",
+    title: "Individual & Community Outcomes",
+    color: "#16A085",
+    desc: "What success looks like—for individuals and for communities. Outcomes feed back into Layer 1.",
+    topics: [
+      { id:"out-t1", question:"What individual outcomes does stable housing produce?", status:"strong",
+        summary:"Housing stability is consistently achieved by Housing First models. Evidence on health recovery, employment, and quality of life outcomes is generally positive but variable. Dignity and agency are harder to measure but increasingly included in person-centered outcome frameworks.",
+        gap:"Long-term follow-up data is limited; most studies track outcomes for 1–2 years post-placement.", tags:["housing stability","health","employment","quality of life","dignity"], hpri:true,
+        cites:[{authors:"Padgett, Henwood & Tsemberis",year:2016,title:"Housing First — Oxford University Press"}] },
+      { id:"out-t2", question:"What are the community-level benefits of reducing homelessness?", status:"emerging",
+        summary:"Cost-of-homelessness studies document savings in emergency services, healthcare, and criminal justice. Evidence on public space, neighborhood stability, and economic productivity is less rigorous. Community-benefit framing is politically important but methodologically challenging.",
+        gap:"Cost savings evidence fairly strong; broader community benefit evidence (public space, economic productivity) is weaker and harder to attribute causally.", tags:["community outcomes","cost savings","public space","economic productivity"], cites:[] },
+      { id:"out-t3", question:"How do outcomes vary by race, and are racial disparities in homelessness narrowing?", status:"gap",
+        summary:"Racial disparities in homelessness entry are well-documented, but whether current interventions differentially benefit or fail Black, AIAN, and other overrepresented groups is largely unknown.",
+        gap:"Critical gap. Racially disaggregated outcome data is improving but still limited. Whether the system is reducing racial disparities remains largely unanswered.", tags:["racial equity","outcomes","disparities"], hpri:true, cites:[] }
+    ]
+  }
+];
+
+// ═══════════════════════════════════
+// VIEW SWITCHING
+// ═══════════════════════════════════
+function showView(view, btn) {
+  document.querySelectorAll('.main[id^=view]').forEach(el => el.style.display = 'none');
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('view-' + view).style.display = 'block';
+  btn.classList.add('active');
+  document.getElementById('filter-bar').style.display = (view === 'topics') ? 'flex' : 'none';
+  if (view === 'topics') renderTopics();
+}
+
+// ═══════════════════════════════════
+// RENDER TOPICS VIEW
+// ═══════════════════════════════════
+function renderTopics() {
+  const container = document.getElementById('sections-container');
+  if (container.dataset.rendered) return;
+  container.dataset.rendered = "1";
+
+  sections.forEach(sec => {
+    const header = document.createElement('div');
+    header.className = 'section-header';
+    header.innerHTML = `
+      <div class="section-label" style="color: ${sec.color}">${sec.label}</div>
+      <h2>${sec.title}</h2>
+      <div class="section-desc">${sec.desc}</div>
+    `;
+    container.appendChild(header);
+
+    const grid = document.createElement('div');
+    grid.className = 'topic-grid';
+    sec.topics.forEach(t => {
+      grid.appendChild(buildCard(t, sec));
+    });
+    container.appendChild(grid);
+  });
+}
+
+function buildCard(t, sec) {
+  const card = document.createElement('div');
+  card.className = `topic-card status-${t.status}`;
+  card.dataset.status = t.status;
+
+  const statusLabels = { strong: '✓ Strong evidence', emerging: '~ Emerging evidence', gap: '✗ Evidence gap' };
+  const citesHtml = t.cites && t.cites.length ? `
+    <div class="card-citations">
+      <div class="cite-label">Key sources</div>
+      ${t.cites.map(c => `<div class="cite-item">${c.authors} (${c.year}) — ${c.title}${c.hpri ? ' <span class="hpri-badge">HPRI</span>' : ''}</div>`).join('')}
+    </div>` : '';
+
+  const hpriFlag = t.hpri ? ' <span class="hpri-badge">HPRI</span>' : '';
+
+  card.innerHTML = `
+    <div class="card-status ${t.status}">${statusLabels[t.status]}</div>
+    <div class="card-question">${t.question}${hpriFlag}</div>
+    <div class="card-summary">${t.summary}</div>
+    ${t.gap ? `<div class="card-gap"><span class="gap-label">Research gap: </span>${t.gap}</div>` : ''}
+    <div class="card-tags">${(t.tags||[]).map(tag => `<span class="tag">${tag}</span>`).join('')}</div>
+    ${citesHtml}
+  `;
+  card.onclick = () => openModal(t, sec);
+  return card;
+}
+
+// ═══════════════════════════════════
+// FILTER
+// ═══════════════════════════════════
+function filterTopics(status, btn) {
+  renderTopics();
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.className = 'filter-btn';
+  });
+  if (status === 'all') {
+    btn.classList.add('filter-btn');
+    document.querySelectorAll('.topic-card').forEach(c => c.classList.remove('hidden'));
+  } else {
+    btn.classList.add(`active-${status}`);
+    document.querySelectorAll('.topic-card').forEach(c => {
+      c.classList.toggle('hidden', c.dataset.status !== status);
+    });
+  }
+}
+
+// ═══════════════════════════════════
+// FRAMEWORK BLOCK CLICK (overview)
+// ═══════════════════════════════════
+function showSection(sectionId) {
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  tabBtns[1].click(); // Topics tab
+  setTimeout(() => {
+    const headers = document.querySelectorAll('.section-header');
+    headers.forEach(h => {
+      const label = h.querySelector('.section-label');
+      const sec = sections.find(s => s.id === sectionId);
+      if (sec && label && label.textContent.includes(sec.label)) {
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }, 100);
+}
+
+// ═══════════════════════════════════
+// MODAL
+// ═══════════════════════════════════
+function openModal(t, sec) {
+  const statusLabels = { strong: '✓ Strong evidence', emerging: '~ Emerging evidence', gap: '✗ Evidence gap' };
+  const citesHtml = t.cites && t.cites.length ? `
+    <div class="modal-cites">
+      <h4>Key Sources</h4>
+      ${t.cites.map(c => `<div style="margin-bottom:6px; font-family:Arial,sans-serif; font-size:13px; color:#333;"><strong>${c.authors}</strong> (${c.year}) — ${c.title}${c.hpri?'<span class="hpri-badge">HPRI</span>':''}</div>`).join('')}
+    </div>` : '';
+
+  document.getElementById('modal-content').innerHTML = `
+    <div class="modal-section" style="color:${sec.color}">${sec.label} — ${sec.title}</div>
+    <h2>${t.question}</h2>
+    <div style="margin: 10px 0 16px;"><span class="card-status ${t.status}" style="font-family:Arial,sans-serif;font-size:12px;font-weight:bold;text-transform:uppercase;letter-spacing:0.5px;color:var(--${t.status})">${statusLabels[t.status]}</span>${t.hpri ? ' <span class="hpri-badge">HPRI research</span>' : ''}</div>
+    <div class="modal-summary">${t.summary}</div>
+    ${t.gap ? `<div class="modal-gap"><div class="label">Evidence Gap</div><p>${t.gap}</p></div>` : ''}
+    ${citesHtml}
+    <div style="margin-top:14px;">${(t.tags||[]).map(tag => `<span class="tag">${tag}</span>`).join(' ')}</div>
+  `;
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+}
+
+function closeModalOnOverlay(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModal();
+}
+
+// ═══════════════════════════════════
+// HEATMAP (overview page)
+// ═══════════════════════════════════
+const heatmapSample = [
+  { secId:"layer2", topicId:"l2-t1", status:"strong" },
+  { secId:"layer4", topicId:"l4-t1", status:"strong" },
+  { secId:"prevention", topicId:"prev-t1", status:"strong" },
+  { secId:"layer1", topicId:"l1-t3", status:"strong" },
+  { secId:"experience", topicId:"exp-t2", status:"strong" },
+  { secId:"outcomes", topicId:"out-t1", status:"strong" },
+  { secId:"layer3", topicId:"l3-t4", status:"emerging" },
+  { secId:"experience", topicId:"exp-t3", status:"emerging" },
+  { secId:"prevention", topicId:"prev-t2", status:"emerging" },
+  { secId:"layer1", topicId:"l1-t2", status:"gap" },
+  { secId:"layer4", topicId:"l4-t7", status:"gap" },
+  { secId:"outcomes", topicId:"out-t3", status:"gap" },
+];
+
+function renderHeatmap() {
+  const grid = document.getElementById('heatmap-cells');
+  heatmapSample.forEach(item => {
+    const sec = sections.find(s => s.id === item.secId);
+    const topic = sec.topics.find(t => t.id === item.topicId);
+    const cell = document.createElement('div');
+    cell.className = `heatmap-cell status-${item.status}`;
+    cell.innerHTML = `<div class="cell-section">${sec.label}</div><div class="cell-q">${topic.question}</div>`;
+    cell.onclick = () => openModal(topic, sec);
+    grid.appendChild(cell);
+  });
+}
+
+renderHeatmap();
+
+// ═══════════════════════════════════
+// CATALOGUE DATA (auto-generated)
+// ═══════════════════════════════════
+const CATALOGUE_PAPERS = {
+  "l1-t1": [],
+  "l1-t2": [],
+  "l1-t3": [
+    {
+      "title": "Mitigating the Health Impacts of Encampment Sweeps in California",
+      "authors": "Kaitlin Schwan, Kyle Patton, Catherine Weaver, Brian Zunner-Keating, Brett Feldman, Daphne Achilles, M.K. Orsulak, Matthew Beare, Corinne T. Feldman, Katherine Pocock",
+      "year": 2025,
+      "venue": "USC Street Medicine",
+      "url": "https://hpri.usc.edu/homeless_research/mitigating-the-health-impacts-of-encampment-sweeps-in-california/"
+    },
+    {
+      "title": "Housing First as an Alternative to Criminalization: Preliminary Findings from Interviews with Unhoused and Formerly Unhoused People in Miami-Dade County",
+      "authors": "Matthew D. Marr, Melissa Hurtado Nuez",
+      "year": 2025,
+      "venue": "Steven J. Green School of International and Public Affairs. Florida International University",
+      "url": "https://hpri.usc.edu/homeless_research/housing-first-as-an-alternative-to-criminalization-preliminary-findings-from-interviews-with-unhoused-and-formerly-unhoused-people-in-miami-dade-county/"
+    },
+    {
+      "title": "Take a Stand Against the Criminalization of Homelessness",
+      "authors": "Jerry Jones",
+      "year": 2023,
+      "venue": "National Alliance to End Homelessness",
+      "url": "https://hpri.usc.edu/homeless_research/take-a-stand-against-the-criminalization-of-homelessness/"
+    },
+    {
+      "title": "Periodic Assessment of Trajectories of Housing, Homelessness and Health (PATHS): Fall 2023 Update: Encampment Sweeps and Housing Trajectories",
+      "authors": "Randall Kuhn, Benjamin Henwood, Jessie Chien",
+      "year": 2023,
+      "venue": "",
+      "url": "https://hpri.usc.edu/homeless_research/periodic-assessment-of-trajectories-of-housing-homelessness-and-health-paths-fall-2023-update-encampment-sweeps-and-housing-trajectories/"
+    },
+    {
+      "title": "Policing Homelessness: A review of the literature on policing policies that target homelessness and best practices for improving outcomes",
+      "authors": "",
+      "year": 2021,
+      "venue": "Homelessness Policy Research Institute",
+      "url": "https://hpri.usc.edu/homeless_research/policing-homelessness-a-review-of-the-literature-on-policing-policies-that-target-homelessness-and-best-practices-for-improving-outcomes/"
+    }
+  ],
+  "l1-t4": [
+    {
+      "title": "Cost Savings Created by Housing Initiatives for Older Adults: Fact Sheet",
+      "authors": "Nick Marcone, Nick Weinmeister",
+      "year": 2023,
+      "venue": "Homelessness Policy Research Institute",
+      "url": "https://hpri.usc.edu/homeless_research/cost-savings-created-by-housing-initiatives-for-older-adults-fact-sheet/"
+    }
+  ],
+  "l2-t1": [
+    {
+      "title": "What California Can Learn from the Affordable Housing Delivery Systems of Other States",
+      "authors": "Jenna Davis, Sarah Karlinsky, Ben Metcalf, Samuel Arnett",
+      "year": 2026,
+      "venue": "Terner Center for Housing Innovation, UC Berkeley",
+      "url": "https://hpri.usc.edu/homeless_research/what-california-can-learn-from-the-affordable-housing-delivery-systems-of-other-states/"
+    },
+    {
+      "title": "Can New Housing Supply Mitigate Displacement and Exclusion? Evidence from Los Angeles and San Francisco",
+      "authors": "Karen Chapple, Taesoo Song",
+      "year": 2025,
+      "venue": "Journal of the American Planning Association",
+      "url": "https://hpri.usc.edu/homeless_research/can-new-housing-supply-mitigate-displacement-and-exclusion-evidence-from-los-angeles-and-san-francisco/"
+    },
+    {
+      "title": "Who Is LIHTC Built for? The Distribution of Affordable Housing Units by Rents, Tenant Incomes, and Project Features in California",
+      "authors": "Ann Owens",
+      "year": 2025,
+      "venue": "Housing Policy Debate",
+      "url": "https://hpri.usc.edu/homeless_research/who-is-lihtc-built-for-the-distribution-of-affordable-housing-units-by-rents-tenant-incomes-and-project-features-in-california/"
+    },
+    {
+      "title": "America\u2019s Housing Market Is Failing Older Adults",
+      "authors": "Linna Zhu, Amalie Zinn",
+      "year": 2025,
+      "venue": "Urban Institute",
+      "url": "https://hpri.usc.edu/homeless_research/americas-housing-market-is-failing-older-adults/"
+    },
+    {
+      "title": "America\u2019s housing affordability crisis and the decline of housing supply",
+      "authors": "Edward Glaeser, Joseph Gyourko",
+      "year": 2025,
+      "venue": "The Brookings Papers on Economic Activity (BPEA)",
+      "url": "https://hpri.usc.edu/homeless_research/americas-housing-affordability-crisis-and-the-decline-of-housing-supply/"
+    },
+    {
+      "title": "Single-Family Zoning in California: A Statewide Analysis",
+      "authors": "Stephen Menendian, Shahan Shahid Nawaz, Samir Gambhir",
+      "year": 2024,
+      "venue": "Othering & Belonging Institute",
+      "url": "https://hpri.usc.edu/homeless_research/single-family-zoning-in-california-a-statewide-analysis/"
+    },
+    {
+      "title": "Los Angeles Business Council Institute Report: The Affordable Housing Crisis in Los Angeles: Impacts to LA\u2019s Fastest Growing Industries",
+      "authors": "By Gary Painter",
+      "year": 2023,
+      "venue": "LABC Institute",
+      "url": "https://hpri.usc.edu/homeless_research/los-angeles-business-council-institute-report-the-affordable-housing-crisis-in-los-angeles-impacts-to-las-fastest-growing-industries/"
+    },
+    {
+      "title": "Homelessness and Housing Supply",
+      "authors": "Casey J. Dawkins",
+      "year": 2023,
+      "venue": "Journal of Urban Affairs",
+      "url": "https://hpri.usc.edu/homeless_research/homelessness-and-housing-supply/"
+    }
+  ],
+  "l2-t2": [
+    {
+      "title": "Assessing Heterogeneity in Homelessness Risk and Housing First Supports\u2019 Effectiveness by Race and Ethnicity among Older Adults Experiencing Homelessness: Evidence from Los Angeles County Final Report",
+      "authors": "Jared N. Schachner, Gary Painter, Steven Schmidt",
+      "year": 2025,
+      "venue": "",
+      "url": "https://hpri.usc.edu/homeless_research/assessing-heterogeneity-in-homelessness-risk-and-housing-first-supports-effectiveness-by-race-and-ethnicity-among-older-adults-experiencing-homelessness-evidence-from-los-angeles-county-fina/"
+    },
+    {
+      "title": "The Full Spectrum of Latinx Homelessness: Understanding and Addressing Doubling Up",
+      "authors": "Melissa Chinchilla, Deyanira Nevarez Martinez, Molly Richard",
+      "year": 2023,
+      "venue": "",
+      "url": "https://hpri.usc.edu/homeless_research/periodic-assessment-of-trajectories-of-housing-homelessness-and-health-paths-fall-2023-update-encampment-sweeps-and-housing-trajectories-2/"
+    },
+    {
+      "title": "Race and Ethnicity and Sex Variation in COVID-19 Mortality Risks Among Adults Experiencing Homelessness in Los Angeles County, California",
+      "authors": "Natalie A. C. Porter, Hannah K. Brosnan, Alicia H. Chang, Benjamin F. Henwood, Randall Kuhn",
+      "year": 2022,
+      "venue": "JAMA Network",
+      "url": "https://hpri.usc.edu/homeless_research/race-and-ethnicity-and-sex-variation-in-covid-19-mortality-risks-among-adults-experiencing-homelessness-in-los-angeles-county-california/"
+    },
+    {
+      "title": "Ethnic Inequalities and Homelessness in the UK",
+      "authors": "Nissa Finney",
+      "year": 2022,
+      "venue": "Centre for Homelessness Impact",
+      "url": "https://hpri.usc.edu/homeless_research/ethnic-inequalities-and-homelessness-in-the-uk/"
+    },
+    {
+      "title": "Housing and Homelessness in Indigenous Communities of Canada\u2019s North",
+      "authors": "Sandeep K. Agrawal, Celine Zoe",
+      "year": 2021,
+      "venue": "Housing Policy Debate",
+      "url": "https://hpri.usc.edu/homeless_research/housing-and-homelessness-in-indigenous-communities-of-canadas-north/"
+    },
+    {
+      "title": "Racial Inequity and Homelessness: Findings from the SPARC Study",
+      "authors": "Jeffrey Olivet, Catriona Wilkey, Molly Richard, Marc Dones, Julia Tripp, Maya Beit-Arie, Svetlana Yampolskaya, and Regina Cannon",
+      "year": 2021,
+      "venue": "The ANNALS of the American Academy of Political and Social Science",
+      "url": "https://hpri.usc.edu/homeless_research/racial-inequity-and-homelessness-findings-from-the-sparc-study/"
+    },
+    {
+      "title": "Latinx Homelessness in Los Angeles",
+      "authors": "Melissa Chinchilla, Victoria Ciudad-Real, Elly Schoen, Allan Broslawsky, Ian Gabriel",
+      "year": 2020,
+      "venue": "Homelessness Policy Research Institute",
+      "url": "https://hpri.usc.edu/homeless_research/latinx-homelessness-in-los-angeles/"
+    },
+    {
+      "title": "Toward Equity: Understanding Black Californians\u2019 Experiences of Homelessness",
+      "authors": "",
+      "year": "",
+      "venue": "University of California San Fransisco Benioff Homelessness and Housing Initiative",
+      "url": "https://hpri.usc.edu/homeless_research/toward-equity-understanding-black-californians-experiences-of-homelessness/"
+    }
+  ],
+  "l2-t3": [
+    {
+      "title": "Poverty, Food Insecurity, and Housing Instability Among US Health Care Workers",
+      "authors": "Anthony Zhong, Chloe Gao, Donald Szlosek, Dang Nguyen, Maelys J. Amat, Russell S. Phillips",
+      "year": 2025,
+      "venue": "JAMA Network",
+      "url": "https://hpri.usc.edu/homeless_research/poverty-food-insecurity-and-housing-instability-among-us-health-care-workers/"
+    },
+    {
+      "title": "Economic Mobility or Safety Net? Examining Employment Status and Wage Trajectories of Housing Choice Voucher Recipients",
+      "authors": "Ruoniu Wang, Alex Ramiller, Arthur Acolin, Rebecca J. Walter",
+      "year": 2025,
+      "venue": "Housing Policy Debate",
+      "url": "https://hpri.usc.edu/homeless_research/economic-mobility-or-safety-net-examining-employment-status-and-wage-trajectories-of-housing-choice-voucher-recipients/"
+    },
+    {
+      "title": "MIRACLE MONEY: CALIFORNIA &#8211; What we learned from a study of basic income and social support for people experiencing homelessness",
+      "authors": "",
+      "year": 2025,
+      "venue": "USC Suzanne Dworak-Peck School of Social Work Center for Homelessness, Housing and Health Equity Research",
+      "url": "https://hpri.usc.edu/homeless_research/miracle-money-california-what-we-learned-from-a-study-of-basic-income-and-social-support-for-people-experiencing-homelessness/"
+    },
+    {
+      "title": "Evaluating San Francisco\u2019s Guaranteed Income Program for Young People Who Aged out of Extended Foster Care",
+      "authors": "Amy Dworsky",
+      "year": 2025,
+      "venue": "Chapin Hall",
+      "url": "https://hpri.usc.edu/homeless_research/evaluating-san-franciscos-guaranteed-income-program-for-young-people-who-aged-out-of-extended-foster-care/"
+    },
+    {
+      "title": "How Much Do You Need to Earn to Afford a Modest Apartment in Your State?",
+      "authors": "",
+      "year": 2025,
+      "venue": "National Low Income Housing Coalition",
+      "url": "https://hpri.usc.edu/homeless_research/how-much-do-you-need-to-earn-to-afford-a-modest-apartment-in-your-state/"
+    },
+    {
+      "title": "The American Guaranteed Income Studies: City of Los Angeles BIG:LEAP",
+      "authors": "Bo-Kyung Elizabeth Kim, Amy Castro, Stacia West, Nidhi Tandon, Loraine Ho, Vanessa Tepos Nguyen, Karim Sharif",
+      "year": 2024,
+      "venue": "Center for Guaranteed Income Research",
+      "url": "https://hpri.usc.edu/homeless_research/the-american-guaranteed-income-studies-city-of-los-angeles-bigleap/"
+    },
+    {
+      "title": "Denver Basic Income Project Year One Qualitative Evaluation Report",
+      "authors": "Daniel Brisson, Katie Calhoun, Laura Coddington, Natcha Connot, McKay Johnsen, Stephanie Locke, Becca Mann, Chloe Randall, Olivia Sanders",
+      "year": 2024,
+      "venue": "Denver Basic Income Project",
+      "url": "https://hpri.usc.edu/homeless_research/denver-basic-income-project-year-one-qualitative-evaluation-report/"
+    },
+    {
+      "title": "Denver Basic Income Project Year One Evaluation Report",
+      "authors": "Daniel Brisson, Katie Hoops Calhoun, Laura Coddington, Jett Flaxman, Stephanie Locke, Becca Mann, Anthony Traver, Hexin Yang",
+      "year": 2024,
+      "venue": "Denver Basic Income Project",
+      "url": "https://hpri.usc.edu/homeless_research/denver-basic-income-project-year-one-evaluation-report/"
+    }
+  ],
+  "l2-t4": [
+    {
+      "title": "The Health Benefits of Rent Control: A Policy Brief for Public Health Practitioners",
+      "authors": "",
+      "year": 2025,
+      "venue": "Health in Partnership",
+      "url": "https://hpri.usc.edu/homeless_research/the-health-benefits-of-rent-control-a-policy-brief-for-public-health-practitioners/"
+    },
+    {
+      "title": "Between the Public and the Private: Landlord Liaisons at Public Housing Authorities",
+      "authors": "Philip Garboden, Nishi Kumar, Rachel Engel",
+      "year": 2025,
+      "venue": "Housing Policy Debate",
+      "url": "https://hpri.usc.edu/homeless_research/between-the-public-and-the-private-landlord-liaisons-at-public-housing-authorities/"
+    },
+    {
+      "title": "Policy Brief: Examining Three Encampment Resolution Efforts in Los Angeles: Lessons Learned and Looking Forward",
+      "authors": "Lauren Dunton, Nichole Fiore",
+      "year": 2025,
+      "venue": "The Conrad N. Hilton Foundation, Abt Global",
+      "url": "https://hpri.usc.edu/homeless_research/policy-brief-examining-three-encampment-resolution-efforts-in-los-angeles-lessons-learned-and-looking-forward/"
+    },
+    {
+      "title": "Are Public Housing and Homelessness Linked? Evidence from Over 150 Large U.S. Metros and 9 International Case Studies",
+      "authors": "Jared N. Schachner, Gary Painter, Junmin Byon",
+      "year": 2024,
+      "venue": "Homelessness Policy Research Institute",
+      "url": "https://hpri.usc.edu/homeless_research/are-public-housing-and-homelessness-linked/"
+    },
+    {
+      "title": "New Federal Funding Alone Won\u2019t Be Enough to Help Students Catch Up in the Classroom Post Pandemic",
+      "authors": "Vincent Quan, Bi Vuong",
+      "year": 2023,
+      "venue": "Hechinger Report",
+      "url": "https://hpri.usc.edu/homeless_research/new-federal-funding-alone-wont-be-enough-to-help-students-catch-up-in-the-classroom-post-pandemic/"
+    }
+  ],
+  "l3-t1": [
+    {
+      "title": "Preventing Homelessness: Youth Exiting Foster Care in Los Angeles County",
+      "authors": "Ely Antonio Sep\u00falveda Garc\u00eda, Tamara Cohen Daley, Nichole Fiore",
+      "year": 2025,
+      "venue": "Abt Global, The Conrad N. Hilton Foundation",
+      "url": "https://hpri.usc.edu/homeless_research/preventing-homelessness-among-transition-age-foster-youth-in-l-a-county/"
+    },
+    {
+      "title": "How Much Would It Cost to Provide Housing First to All Households Staying in Homeless Shelters?",
+      "authors": "Dennis Culhane, Matthew Fowle, Joy Moses",
+      "year": 2025,
+      "venue": "National Alliance to End Homelessness",
+      "url": "https://hpri.usc.edu/homeless_research/how-much-would-it-cost-to-provide-housing-first-to-all-households-staying-in-homeless-shelters/"
+    },
+    {
+      "title": "Evaluating San Francisco\u2019s Guaranteed Income Program for Young People Who Aged out of Extended Foster Care",
+      "authors": "Amy Dworsky",
+      "year": 2025,
+      "venue": "Chapin Hall",
+      "url": "https://hpri.usc.edu/homeless_research/evaluating-san-franciscos-guaranteed-income-program-for-young-people-who-aged-out-of-extended-foster-care/"
+    },
+    {
+      "title": "Navigating the Housing and Foster Care Systems in Los Angeles County",
+      "authors": "Sarah B. Hunter, Emma Bianculli, Michelle Bongard, Rick Garvey, Jason M. Ward",
+      "year": 2025,
+      "venue": "",
+      "url": "https://hpri.usc.edu/homeless_research/navigating-the-housing-and-foster-care-systems-in-los-angeles-county/"
+    },
+    {
+      "title": "Aging Out of Foster Care in Los Angeles: Opportunities to Prevent Homelessness Among Transition-Aged Youth",
+      "authors": "Janey Rountree, Robert Santillano, Maya-Buenaventura, Brian Blackwell, April Nunn, Andi Vidaurre",
+      "year": 2024,
+      "venue": "California Policy Lab",
+      "url": "https://hpri.usc.edu/homeless_research/aging-out-of-foster-care-in-los-angeles-opportunities-to-prevent-homelessness-among-transition-aged-youth/"
+    },
+    {
+      "title": "Scaling Housing to End the Foster Care to Homelessness Pipeline",
+      "authors": "Tom DeSimone",
+      "year": 2023,
+      "venue": "Genesis LA Economic Growth Corporation",
+      "url": "https://hpri.usc.edu/homeless_research/scaling-housing-to-end-the-foster-care-to-homelessness-pipeline/"
+    },
+    {
+      "title": "Acceptability of a mobile sensing application to characterize community integration among homeless-experienced veterans",
+      "authors": "Taylor Harris, Sonya Gabrielian, Brian Ilagan, Megan K. Olsen, Michael F. Green",
+      "year": 2022,
+      "venue": "Journal of Community Psychology",
+      "url": "https://hpri.usc.edu/homeless_research/acceptability-of-a-mobile-sensing-application-to-characterize-community-integration-among-homeless-experienced-veterans/"
+    },
+    {
+      "title": "Service utilisation changes in the transition to permanent supportive housing: The role of the housing environment and case management",
+      "authors": "Taylor Harris, Sara Semborski, Harmony Rhoades, Suzanne Wenzel",
+      "year": 2021,
+      "venue": "Health & Social Care in the Community",
+      "url": "https://hpri.usc.edu/homeless_research/service-utilisation-changes-in-the-transition-to-permanent-supportive-housing-the-role-of-the-housing-environment-and-case-management/"
+    }
+  ],
+  "l3-t2": [
+    {
+      "title": "Breaking Barriers Rapid Rehousing Program for Justice-Involved Individuals in Los Angeles County",
+      "authors": "Maya Buenaventura, Alex Sizemore, Austin Smidt, Sarah B. Hunter",
+      "year": 2026,
+      "venue": "",
+      "url": "https://hpri.usc.edu/homeless_research/breaking-barriers-rapid-rehousing-program-for-justice-involved-individuals-in-los-angeles-county/"
+    },
+    {
+      "title": "Preventing Homelessness: Individuals Exiting Jail in Los Angeles County",
+      "authors": "Tamara Cohen Daley, Nichole Fiore",
+      "year": 2025,
+      "venue": "Abt Global, The Conrad N. Hilton Foundation",
+      "url": "https://hpri.usc.edu/homeless_research/preventing-homelessness-among-people-exiting-jail-or-prison/"
+    },
+    {
+      "title": "Building Pathways Beyond Incarceration: A Model for Justice Diversion and Supportive Housing at The Pointe on Vermont",
+      "authors": "Dr. Ryan J. Smith, Bernabe Valderrama, Frejya Lindh",
+      "year": 2025,
+      "venue": "St. Joseph Center, EAH Housing",
+      "url": "https://hpri.usc.edu/homeless_research/building-pathways-beyond-incarceration-a-model-for-justice-diversion-and-supportive-housing-at-the-pointe-on-vermont/"
+    },
+    {
+      "title": "Jailing the Homeless: New Data Shed Light on Unhoused People in Local Jails",
+      "authors": "Leah Wang",
+      "year": 2025,
+      "venue": "Prison Policy Initiavtives",
+      "url": "https://hpri.usc.edu/homeless_research/jailing-the-homeless-new-data-shed-light-on-unhoused-people-in-local-jails/"
+    },
+    {
+      "title": "Supportive Housing for Sexual and Gender Minority Individuals With Criminal Justice Histories: Challenges and Opportunities Identified by Providers and Clients",
+      "authors": "Alex R. Dopp, Sean McKenna, Marylou Gilbert, Sarah B. Hunter",
+      "year": 2022,
+      "venue": "Housing Policy Debate",
+      "url": "https://hpri.usc.edu/homeless_research/supportive-housing-for-sexual-and-gender-minority-individuals-with-criminal-justice-histories-challenges-and-opportunities-identified-by-providers-and-clients-2/"
+    },
+    {
+      "title": "Supportive Housing for Sexual and Gender Minority Individuals With Criminal Justice Histories: Challenges and Opportunities Identified by Providers and Clients",
+      "authors": "Alex R. Dopp, Sean McKenna, Marylou Gilbert & Sarah B. Hunter",
+      "year": 2022,
+      "venue": "RAND Corporation",
+      "url": "https://hpri.usc.edu/homeless_research/supportive-housing-for-sexual-and-gender-minority-individuals-with-criminal-justice-histories-challenges-and-opportunities-identified-by-providers-and-clients/"
+    },
+    {
+      "title": "Costs and Offsets of Providing Supportive Housing to Break the Homelessness-Jail Cycle",
+      "authors": "Sarah Gillespie, Devlin Hanson, Josh Leopold, Alyse D. Oneto",
+      "year": 2021,
+      "venue": "The Urban Institute",
+      "url": "https://hpri.usc.edu/homeless_research/costs-and-offsets-of-providing-supportive-housing-to-break-the-homelessness-jail-cycle/"
+    },
+    {
+      "title": "Does the Timing of Incarceration Impact the Timing and Duration of Homelessness? Evidence from \u201cThe Transitions to Housing\u201d Study",
+      "authors": "Robynn Cox, John Lahey, Harmony Rhoades, Benjamin Henwood, and Suzanne Wenzel",
+      "year": 2020,
+      "venue": "Justice Quarterly",
+      "url": "https://hpri.usc.edu/homeless_research/does-the-timing-of-incarceration-impact-the-timing-and-duration-of-homelessness-evidence-from-the-transitions-to-housing-study/"
+    }
+  ],
+  "l3-t3": [
+    {
+      "title": "Innovative PSH Programs: The People Concern\u2019s Contingency Management Program",
+      "authors": "Drea Younes",
+      "year": 2026,
+      "venue": "Homelessness Policy Research Institute",
+      "url": "https://hpri.usc.edu/homeless_research/innovative-psh-programs-the-people-concerns-contingency-management-program/"
+    },
+    {
+      "title": "Illicit Substance Use and Treatment Access Among Adults Experiencing Homelessness",
+      "authors": "Ryan D. Assaf, Meghan D. Morris, Elana R. Straus, Priest Martinez, Morgan M. Philbin, Margot Kushel",
+      "year": 2025,
+      "venue": "",
+      "url": "https://hpri.usc.edu/homeless_research/illicit-substance-use-and-treatment-access-among-adults-experiencing-homelessness/"
+    },
+    {
+      "title": "How and Why Do People Use Behavioral Health Services? A Qualitative Exploration of Service Use Among People Experiencing Housing Insecurity",
+      "authors": "Lynden Bond, Caitlin Krenn, Deborah Padgett",
+      "year": 2025,
+      "venue": "The Journal of Behavioral Health Services & Research",
+      "url": "https://hpri.usc.edu/homeless_research/how-and-why-do-people-use-behavioral-health-services-a-qualitative-exploration-of-service-use-among-people-experiencing-housing-insecurity/"
+    },
+    {
+      "title": "Sustained mental health and functional responses to the COVID-19 pandemic in Black and White Veterans with psychosis or recent homelessness",
+      "authors": "Derek Novacek, Jonathan Wynn, Amanda McCleery, Eric Reavis, Damla Senturk, Catherine Sugar, Jack Tsai, Michael Green",
+      "year": 2024,
+      "venue": "Journal of Psychiatric Research",
+      "url": "https://hpri.usc.edu/homeless_research/sustained-mental-health-and-functional-responses-to-the-covid-19-pandemic-in-black-and-white-veterans-with-psychosis-or-recent-homelessness/"
+    },
+    {
+      "title": "Practical Guide for Implementing a Trauma-Informed Approach",
+      "authors": "",
+      "year": 2023,
+      "venue": "Substance Abuse and Mental Health Services Administration",
+      "url": "https://hpri.usc.edu/homeless_research/practical-guide-for-implementing-a-trauma-informed-approach/"
+    },
+    {
+      "title": "Behavioral Health Care Delivery Through Street Medicine Programs in California",
+      "authors": "Kimberly Y Su, Brett J Feldman, Corinne T Feldman, Sonali Saluja, Alexis M Coulourides Kogan, Michael R Cousineau",
+      "year": 2023,
+      "venue": "Community Mental Health Journal",
+      "url": "https://hpri.usc.edu/homeless_research/behavioral-health-care-delivery-through-street-medicine-programs-in-california/"
+    },
+    {
+      "title": "Bringing Lived Experience to Research on Health and Homelessness: Perspectives of Researchers and Lived Experience Partners",
+      "authors": "Howard Padwa, Benjamin F. Henwood, Roya Ijadi-Maghsoodi, Bikki Tran-Smith, Anna Darby, Ricky Bluthenthal, Melissa Chinchilla, Katherine Diaz Vickery, Randall Kuhn, Alexander Lawton, Ena Fenderson, Elvin Galarza, Anthony Haynes, Dennis King, Emily Martiniuk, Pamela Marshall, Sonny Mendoza, Theodore Patton, Suzette Shaw, Reba Stevens, Lillian Gelberg",
+      "year": 2023,
+      "venue": "Community Mental Health Journal",
+      "url": "https://hpri.usc.edu/homeless_research/bringing-lived-experience-to-research-on-health-and-homelessness-perspectives-of-researchers-and-lived-experience-partners/"
+    },
+    {
+      "title": "The Effects of COVID-19 on the Mental Health and Job Stress of Frontline Homelessness Services Workers in Texas (U.S.)",
+      "authors": "Amanda Aykanian",
+      "year": 2022,
+      "venue": "Health and Social Care",
+      "url": "https://hpri.usc.edu/homeless_research/the-effects-of-covid-19-on-the-mental-health-and-job-stress-of-frontline-homelessness-services-workers-in-texas-u-s/"
+    }
+  ],
+  "l3-t4": [
+    {
+      "title": "The Rise of Corporate Landlords: An Examination of Behavioral Differences in the Multifamily Market",
+      "authors": "Ingrid Gould Ellen, Katherine O\u2019Regan, Katharine Harwood",
+      "year": 2025,
+      "venue": "Real Estate Economics",
+      "url": "https://hpri.usc.edu/homeless_research/the-rise-of-corporate-landlords-an-examination-of-behavioral-differences-in-the-multifamily-market/"
+    },
+    {
+      "title": "Between the Public and the Private: Landlord Liaisons at Public Housing Authorities",
+      "authors": "Philip Garboden, Nishi Kumar, Rachel Engel",
+      "year": 2025,
+      "venue": "Housing Policy Debate",
+      "url": "https://hpri.usc.edu/homeless_research/between-the-public-and-the-private-landlord-liaisons-at-public-housing-authorities/"
+    },
+    {
+      "title": "Opening the \u201cBlack Box\u201d of Tenant Screening",
+      "authors": "Judah Axelrod, Brendan Chen, Katie Fallon, Sonia Torres Rodr\u00edguez",
+      "year": 2025,
+      "venue": "Urban Institute",
+      "url": "https://hpri.usc.edu/homeless_research/opening-the-black-box-of-tenant-screening/"
+    }
+  ],
+  "l3-t5": [
+    {
+      "title": "MIRACLE MONEY: CALIFORNIA &#8211; What we learned from a study of basic income and social support for people experiencing homelessness",
+      "authors": "",
+      "year": 2025,
+      "venue": "USC Suzanne Dworak-Peck School of Social Work Center for Homelessness, Housing and Health Equity Research",
+      "url": "https://hpri.usc.edu/homeless_research/miracle-money-california-what-we-learned-from-a-study-of-basic-income-and-social-support-for-people-experiencing-homelessness/"
+    },
+    {
+      "title": "The \u201cMiracle\u201d of Cash and Connection: Unhoused Experiences of a Basic Income and Social Support Pilot Program",
+      "authors": "Keenan Leary, Tee Martin, JC Hall",
+      "year": 2023,
+      "venue": "UCLA Luskin School of Public Affairs",
+      "url": "https://hpri.usc.edu/homeless_research/the-miracle-of-cash-and-connection-unhoused-experiences-of-a-basic-income-and-social-support-pilot-program/"
+    },
+    {
+      "title": "Social network change after moving into permanent supportive housing: Who stays and who goes?",
+      "authors": "Harmony Rhoades, Hsun-Ta Hsu, Eric RIce, Taylor Harris, Wichada La Motte-Kerr, Hailey Winetrobe, Benjamin Henwood, and Suzanne Wenzel",
+      "year": 2020,
+      "venue": "Network Science",
+      "url": "https://hpri.usc.edu/homeless_research/social-network-change-moving-permanent-supportive-housing-stays-goes/"
+    },
+    {
+      "title": "Mental health change in the transition to permanent supportive housing: The role of housing and social networks",
+      "authors": "Taylor Harris, Harmony Rhoades, Lei Duan, & Suzanne L. Wenzel",
+      "year": 2019,
+      "venue": "Journal of Community Psychology",
+      "url": "https://hpri.usc.edu/homeless_research/mental-health-change-in-the-transition-to-permanent-supportive-housing-the-role-of-housing-and-social-networks-2/"
+    },
+    {
+      "title": "Mental health change in the transition to permanent supportive housing: The role of housing and social networks",
+      "authors": "Taylor Harris, Harmony Rhoades, Lei Duan, and Suzanne L. Wenzel",
+      "year": 2019,
+      "venue": "Journal of Community Psychology",
+      "url": "https://hpri.usc.edu/homeless_research/mental-health-change-in-the-transition-to-permanent-supportive-housing-the-role-of-housing-and-social-networks/"
+    },
+    {
+      "title": "Social networks and substance use after transitioning into permanent supportive housing",
+      "authors": "Harmony Rhoades, Wichada La Motte-Kerr, Lei Duan, Darlene Woo, Eric Rice, Benjamin Henwood, Taylor Harris, and Suzanne L. Wenzel",
+      "year": 2018,
+      "venue": "Drug and Alcohol Dependence",
+      "url": "https://hpri.usc.edu/homeless_research/social-networks-and-substance-use-after-transitioning-into-permanent-supportive-housing/"
+    },
+    {
+      "title": "Differences in Health and Social Support between Homeless Men and Women Entering Permanent Supportive Housing",
+      "authors": "Hailey Winetrobe, Suzanne Wenzel, Harmony Rhoades, Benjamin Henwood, Eric Rice, and Taylor Harris",
+      "year": 2017,
+      "venue": "Womens Health Issues",
+      "url": "https://hpri.usc.edu/homeless_research/differences-health-social-support-homeless-men-women-entering-permanent-supportive-housing-2/"
+    },
+    {
+      "title": "Feasibility of a computer\u2011assisted social network motivational interviewing intervention for substance use and HIV risk behaviors for housing first residents",
+      "authors": "Karen Chan Osilla, David P. Kennedy, Sarah B. Hunter, and Ervant Maksabedian",
+      "year": 2016,
+      "venue": "Addiction Science & Clinical Practice",
+      "url": "https://hpri.usc.edu/homeless_research/feasibility-of-a-computer%e2%80%91assisted-social-network-motivational-interviewing-intervention-for-substance-use-and-hiv-risk-behaviors-for-housing-first-residents/"
+    }
+  ],
+  "l3-t6": [
+    {
+      "title": "Same Storm, Different Boat: Student Homelessness &#038; Natural Disaster",
+      "authors": "Alexandra Pavlakis, J. Kessa Roberts, Meredith Richards, Mai Zaru",
+      "year": 2026,
+      "venue": "The Urban Review",
+      "url": "https://hpri.usc.edu/homeless_research/same-storm-different-boat-student-homelessness-natural-disaster/"
+    },
+    {
+      "title": "Growing up Homeless: Student Homelessness and Educational Outcomes in Los Angeles",
+      "authors": "Soledad De Gregorio, Tasminda K. Dhaliwal, Ann Owens, and Gary Painter",
+      "year": 2020,
+      "venue": "Annenberg Brown University",
+      "url": "https://hpri.usc.edu/homeless_research/growing-up-homeless-student-homelessness-and-educational-outcomes-in-los-angeles/"
+    },
+    {
+      "title": "Students Experiencing Homelessness in LAUSD and the McKinney-Vento Act",
+      "authors": "",
+      "year": 2020,
+      "venue": "Homelessness Policy Research Institute",
+      "url": "https://hpri.usc.edu/homeless_research/students-experiencing-homelessness-in-lausd-and-the-mckinney-vento-act/"
+    },
+    {
+      "title": "Hidden Success: Learning From the Counternarratives of High School Graduates Impacted by Student Homelessness",
+      "authors": "Earl J. Edwards",
+      "year": 2019,
+      "venue": "Urban Education",
+      "url": "https://hpri.usc.edu/homeless_research/hidden-success-learning-from-the-counternarratives-of-high-school-graduates-impacted-by-student-homelessness/"
+    }
+  ],
+  "prev-t1": [
+    {
+      "title": "Project 50: The Cost Effectiveness of the Permanent Supportive Housing Model in the Skid Row Section of Los Angeles County",
+      "authors": "Halil Toros, Max Stevens, Manuel Moreno",
+      "year": 2012,
+      "venue": "County of Los Angeles Chief Executive Office Service Integration Branch",
+      "url": "https://hpri.usc.edu/homeless_research/project-50-cost-effectiveness-permanent-supportive-housing-model-skid-row-section-los-angeles-county/"
+    }
+  ],
+  "prev-t2": [
+    {
+      "title": "Breaking Barriers Rapid Rehousing Program for Justice-Involved Individuals in Los Angeles County",
+      "authors": "Maya Buenaventura, Alex Sizemore, Austin Smidt, Sarah B. Hunter",
+      "year": 2026,
+      "venue": "",
+      "url": "https://hpri.usc.edu/homeless_research/breaking-barriers-rapid-rehousing-program-for-justice-involved-individuals-in-los-angeles-county/"
+    },
+    {
+      "title": "Addressing Unsheltered Homelessness through the Joint Transitional Housing \u2013 Rapid Rehousing Program",
+      "authors": "Lynden Bond, Katie Elder, Anna Do\u00f1ate",
+      "year": 2025,
+      "venue": "Urban Institute, University of Kentucky College of Social Work",
+      "url": "https://hpri.usc.edu/homeless_research/addressing-unsheltered-homelessness-through-the-joint-transitional-housing-rapid-rehousing-program/"
+    },
+    {
+      "title": "Breaking Barriers: A Rapid Rehousing and Employment Pilot Program for Adults on Probation in Los Angeles County",
+      "authors": "Sarah B. Hunter, Adam Scherling, Melissa Felician, Sangita M. Baxi, and Matthew Cefalu",
+      "year": 2020,
+      "venue": "RAND Corporation: Social and Economic Well-Being",
+      "url": "https://hpri.usc.edu/homeless_research/breaking-barriers-a-rapid-rehousing-and-employment-pilot-program-for-adults-on-probation-in-los-angeles-county/"
+    },
+    {
+      "title": "Predictors of Homelessness Among Families and Single Adults After Exit from Homelessness Prevention and Rapid Rehousing Programs: Evidence from the Department of Veterans Affairs Supportive Services for Veteran Families Program",
+      "authors": "Thomas Byrne, Dan Treglia, Dennis P. Culhane, John Kuhn, and Vincent Kane",
+      "year": 2015,
+      "venue": "Housing Policy Debate",
+      "url": "https://hpri.usc.edu/homeless_research/predictors-homelessness-among-families-single-adults-exit-homelessness-prevention-rapid-rehousing-programs-evidence-department-veterans-affairs-supportive-services-f/"
+    }
+  ],
+  "prev-t3": [
+    {
+      "title": "America\u2019s housing affordability crisis and the decline of housing supply",
+      "authors": "Edward Glaeser, Joseph Gyourko",
+      "year": 2025,
+      "venue": "The Brookings Papers on Economic Activity (BPEA)",
+      "url": "https://hpri.usc.edu/homeless_research/americas-housing-affordability-crisis-and-the-decline-of-housing-supply/"
+    },
+    {
+      "title": "Housing Affordability Standards",
+      "authors": "",
+      "year": 2018,
+      "venue": "Homelessness Policy Research Institute",
+      "url": "https://hpri.usc.edu/homeless_research/housing-affordability-standards/"
+    }
+  ],
+  "exp-t1": [
+    {
+      "title": "Annual Trends Among the Unsheltered in Three Los Angeles Neighborhoods: The Los Angeles Longitudinal Enumeration and Demographic Survey (LA LEADS) 2024 Annual Report",
+      "authors": "Louis Abramson, Sarah B. Hunter, Jason M. Ward, Michelle Bongard, Rick Garvey",
+      "year": 2025,
+      "venue": "RAND Corporation",
+      "url": "https://hpri.usc.edu/homeless_research/annual-trends-among-the-unsheltered-in-three-los-angeles-neighborhoods-the-los-angeles-longitudinal-enumeration-and-demographic-survey-la-leads-2024-annual-report/"
+    },
+    {
+      "title": "Annual Trends Among the Unsheltered in Three Los Angeles Neighborhoods: The Los Angeles Longitudinal Enumeration and Demographic Study (LA LEADS) 2023 Annual Report",
+      "authors": "Jason M. Ward, Rick Garvey, Sarah B. Hunter",
+      "year": 2024,
+      "venue": "RAND Corporation",
+      "url": "https://hpri.usc.edu/homeless_research/annual-trends-among-the-unsheltered-in-three-los-angeles-neighborhoods-the-los-angeles-longitudinal-enumeration-and-demographic-study-la-leads-2023-annual-report/"
+    },
+    {
+      "title": "The Annual Homeless Point-in-Time Count: Limitations and Two Different Solutions",
+      "authors": "Jack Tsai, Jemma Alarc\u00f3n",
+      "year": 2022,
+      "venue": "American Journal of Public Health",
+      "url": "https://hpri.usc.edu/homeless_research/the-annual-homeless-point-in-time-count-limitations-and-two-different-solutions/"
+    },
+    {
+      "title": "Recent Trends Among the Unsheltered in Three Los Angeles Neighborhoods: An Interim Report on the Los Angeles Longitudinal Enumeration and Demographic Survey (LA LEADS) Project",
+      "authors": "Jason M. Ward, Rick Garvey, Sarah B. Hunter",
+      "year": 2022,
+      "venue": "Rand Corporation",
+      "url": "https://hpri.usc.edu/homeless_research/recent-trends-among-the-unsheltered-in-three-los-angeles-neighborhoods-an-interim-report-on-the-los-angeles-longitudinal-enumeration-and-demographic-survey-la-leads-project/"
+    },
+    {
+      "title": "Los Angeles County Homeless Count Data Library: Source Records from Los Angeles Continuum of Care Homeless Counts: 2007 to 2020",
+      "authors": "Daniel Flaming",
+      "year": 2020,
+      "venue": "Economic Roundtable",
+      "url": "https://hpri.usc.edu/homeless_research/los-angeles-county-homeless-count-data-library-source-records-from-los-angeles-continuum-of-care-homeless-counts-2007-to-2020/"
+    },
+    {
+      "title": "The 2019 Annual Homeless Assessment Report (AHAR) to Congress Part 1: Point-in-Time Estimates of Homelessness",
+      "authors": "Dennis Culhane, Meghan Henry, Rian Watt, Anna Mahathey, Jillian Ouellette, Aubrey Sitler, and Jill Khadduri.",
+      "year": 2019,
+      "venue": "The U.S. Department of Housing and Urban Development: Office of Community Planning and Development",
+      "url": "https://hpri.usc.edu/homeless_research/the-2019-annual-homeless-assessment-report-ahar-to-congress/"
+    },
+    {
+      "title": "The 2018 Annual Homeless Assessment Report (AHAR) to Congress Part 1: Point-in-Time Estimates of Homelessness",
+      "authors": "Dennis Culhane, Jill Khadduri, Meghan Henry, Anna Mahathey, Tyler Morrill, Anna Robinson, Azim Shivji, and Rian Watt",
+      "year": 2018,
+      "venue": "The U.S. Department of Housing and Urban Development: Office of Community Planning and Development",
+      "url": "https://hpri.usc.edu/homeless_research/he-2018-annual-homeless-assessment-report-ahar-to-congress-part-1-point-in-time-estimates-of-homelessness/"
+    },
+    {
+      "title": "The 2017 Annual Homeless Assessment Report (AHAR) to Congress Part 1: Point-in-Time Estimates of Homelessness",
+      "authors": "Dennis Culhane, Mark Silverbush, Jill Khadduri, Meghan Henry, Rian Watt, Lily Rosenthal, and Azim Shivji",
+      "year": 2017,
+      "venue": "The U.S. Department of Housing and Urban Development: Office of Community Planning and Development",
+      "url": "https://hpri.usc.edu/homeless_research/the-2017-annual-homeless-assessment-report-ahar-to-congress-part-1-point-in-time-estimates-of-homelessness/"
+    }
+  ],
+  "exp-t2": [
+    {
+      "title": "Older Adult Specific Practice Brief",
+      "authors": "Jasper Chew, Doan Le",
+      "year": 2026,
+      "venue": "Homelessness Policy Research Institute",
+      "url": "https://hpri.usc.edu/homeless_research/older-adult-specific-practice-brief/"
+    },
+    {
+      "title": "Periodic Assessment of Trajectories of Housing, Homelessness, and Health Study (PATHS): Extreme Heat and Health Among Unhoused Angelenos Findings from the PATHS Longitudinal Study",
+      "authors": "Saachi Pavani, Gabrielle Arreglo, Jessie Chien, Randall Kuhn, Benjamin Henwood, Evan M. Shannon",
+      "year": 2026,
+      "venue": "UCLA Fielding School of Public Health, USC Suzanne Dworak-Peck School of Social Work",
+      "url": "https://hpri.usc.edu/homeless_research/periodic-assessment-of-trajectories-of-housing-homelessness-and-health-study-paths-extreme-heat-and-health-among-unhoused-angelenos-findings-from-the-paths-longitudinal-study/"
+    },
+    {
+      "title": "Assessing Heterogeneity in Homelessness Risk and Housing First Supports\u2019 Effectiveness by Race and Ethnicity among Older Adults Experiencing Homelessness: Evidence from Los Angeles County Final Report",
+      "authors": "Jared N. Schachner, Gary Painter, Steven Schmidt",
+      "year": 2025,
+      "venue": "",
+      "url": "https://hpri.usc.edu/homeless_research/assessing-heterogeneity-in-homelessness-risk-and-housing-first-supports-effectiveness-by-race-and-ethnicity-among-older-adults-experiencing-homelessness-evidence-from-los-angeles-county-fina/"
+    },
+    {
+      "title": "Periodic Assessment of Trajectories of Housing, Homelessness, and Health Study (PATHS): The Impact of January 2025 Wildfires on Los Angeles\u2019 Unhoused Community",
+      "authors": "Jessie Chien, Evan M. Shannon, Randall Kuhn, Benjamin Henwood",
+      "year": 2025,
+      "venue": "UCLA Fielding School of Public Health, USC Suzanne Dworak-Peck School of Social Work",
+      "url": "https://hpri.usc.edu/homeless_research/periodic-assessment-of-trajectories-of-housing-homelessness-and-health-study-paths-the-impact-of-january-2025-wildfires-on-los-angeles-unhoused-community/"
+    },
+    {
+      "title": "Periodic Assessment of Trajectories of Housing, Homelessness, and Health Study (PATHS) June 2025 Update: Impact of Immigration Raids on Los Angeles\u2019 Unhoused Community",
+      "authors": "Jessie Chien, Randall Kuhn, Benjamin Henwood",
+      "year": 2025,
+      "venue": "UCLA Fielding School of Public Health, USC Suzanne Dworak-Peck School of Social Work",
+      "url": "https://hpri.usc.edu/homeless_research/periodic-assessment-of-trajectories-of-housing-homelessness-and-health-study-paths-june-2025-update-impact-of-immigration-raids-on-los-angeles-unhoused-community/"
+    },
+    {
+      "title": "Assessing Racial Heterogeneity in \u201cHousing First\u201d  Supports\u2019 Effectiveness Among Older Adults Experiencing  Homelessness: Evidence From Los Angeles County",
+      "authors": "Jared N. Schachner, Steven Schmidt, Gary D. Painter",
+      "year": 2025,
+      "venue": "The Gerontologist",
+      "url": "https://hpri.usc.edu/homeless_research/assessing-racial-heterogeneity-in-housing-first-supports-effectiveness-among-older-adults-experiencing-homelessness-evidence-from-los-angeles-county/"
+    },
+    {
+      "title": "\u201cI Don\u2019t Want to Die on the Street\u201d: Patient and Practitioner Perspectives on Street\u2010Based Care for Older Adults Experiencing Unsheltered Homelessness",
+      "authors": "Anuva Mittal, Enya Lowe, Corinne Feldman, Alexis Coulourides Kogan",
+      "year": 2025,
+      "venue": "Journal of General Internal Medicine",
+      "url": "https://hpri.usc.edu/homeless_research/i-dont-want-to-die-on-the-street-patient-and-practitioner-perspectives-on-street%e2%80%90based-care-for-older-adults-experiencing-unsheltered-homelessness/"
+    },
+    {
+      "title": "Mortality Rates and Causes of Death Among People Experiencing Homelessness in LA County: 2017-2023",
+      "authors": "",
+      "year": 2025,
+      "venue": "County of Los Angeles Public Health",
+      "url": "https://hpri.usc.edu/homeless_research/mortality-rates-and-causes-of-death-among-people-experiencing-homelessness-in-la-county-2017-2023/"
+    }
+  ],
+  "exp-t3": [
+    {
+      "title": "Periodic Assessment of Trajectories of Housing, Homelessness, and Health Study (PATHS): Extreme Heat and Health Among Unhoused Angelenos Findings from the PATHS Longitudinal Study",
+      "authors": "Saachi Pavani, Gabrielle Arreglo, Jessie Chien, Randall Kuhn, Benjamin Henwood, Evan M. Shannon",
+      "year": 2026,
+      "venue": "UCLA Fielding School of Public Health, USC Suzanne Dworak-Peck School of Social Work",
+      "url": "https://hpri.usc.edu/homeless_research/periodic-assessment-of-trajectories-of-housing-homelessness-and-health-study-paths-extreme-heat-and-health-among-unhoused-angelenos-findings-from-the-paths-longitudinal-study/"
+    },
+    {
+      "title": "Periodic Assessment of Trajectories of Housing, Homelessness, and Health Study (PATHS): The Impact of January 2025 Wildfires on Los Angeles\u2019 Unhoused Community",
+      "authors": "Jessie Chien, Evan M. Shannon, Randall Kuhn, Benjamin Henwood",
+      "year": 2025,
+      "venue": "UCLA Fielding School of Public Health, USC Suzanne Dworak-Peck School of Social Work",
+      "url": "https://hpri.usc.edu/homeless_research/periodic-assessment-of-trajectories-of-housing-homelessness-and-health-study-paths-the-impact-of-january-2025-wildfires-on-los-angeles-unhoused-community/"
+    },
+    {
+      "title": "Periodic Assessment of Trajectories of Housing, Homelessness, and Health Study (PATHS) June 2025 Update: Impact of Immigration Raids on Los Angeles\u2019 Unhoused Community",
+      "authors": "Jessie Chien, Randall Kuhn, Benjamin Henwood",
+      "year": 2025,
+      "venue": "UCLA Fielding School of Public Health, USC Suzanne Dworak-Peck School of Social Work",
+      "url": "https://hpri.usc.edu/homeless_research/periodic-assessment-of-trajectories-of-housing-homelessness-and-health-study-paths-june-2025-update-impact-of-immigration-raids-on-los-angeles-unhoused-community/"
+    },
+    {
+      "title": "Discrimination and Violence Against People Experiencing Homelessness in Los Angeles County: Findings from The Periodic Assessment of Trajectories of Housing, Homelessness, and Health Study (PATHS)",
+      "authors": "",
+      "year": 2024,
+      "venue": "Homelessness Policy Research Institute",
+      "url": "https://hpri.usc.edu/homeless_research/discrimination_brief/"
+    },
+    {
+      "title": "Periodic Assessment of Trajectories of Housing, Homelessness and Health (PATHS): Fall 2023 Update: Encampment Sweeps and Housing Trajectories",
+      "authors": "Randall Kuhn, Benjamin Henwood, Jessie Chien",
+      "year": 2023,
+      "venue": "",
+      "url": "https://hpri.usc.edu/homeless_research/periodic-assessment-of-trajectories-of-housing-homelessness-and-health-paths-fall-2023-update-encampment-sweeps-and-housing-trajectories/"
+    },
+    {
+      "title": "Under Threat: Surveying Unhoused Angelenos in the Era of Camping Enforcement (PATHS)",
+      "authors": "Randall Kuhn, Benjamin Henwood, Alexander Lawton, Jessie Chien",
+      "year": 2022,
+      "venue": "Homelessness Policy Research Institute",
+      "url": "https://hpri.usc.edu/homeless_research/under-threat-surveying-unhoused-angelenos-in-the-era-of-camping-enforcement/"
+    }
+  ],
+  "exp-t4": [
+    {
+      "title": "Health Service Utilization and Costs at the Outset of a Permanent Supportive Housing Program",
+      "authors": "Sarah B. Hunter, Ryan K. McBain, Adam Scherling, Alina I. Palimaru, Matthew Cefalu, William Mcconnell, and Priya Batra",
+      "year": 2020,
+      "venue": "RAND Corporation",
+      "url": "https://hpri.usc.edu/homeless_research/health-service-utilization-and-costs-at-the-outset-of-a-permanent-supportive-housing-program/"
+    }
+  ],
+  "exp-t5": [
+    {
+      "title": "Acceptability of a mobile sensing application to characterize community integration among homeless-experienced veterans",
+      "authors": "Taylor Harris, Sonya Gabrielian, Brian Ilagan, Megan K. Olsen, Michael F. Green",
+      "year": 2022,
+      "venue": "Journal of Community Psychology",
+      "url": "https://hpri.usc.edu/homeless_research/acceptability-of-a-mobile-sensing-application-to-characterize-community-integration-among-homeless-experienced-veterans/"
+    },
+    {
+      "title": "Examining racial differences in community integration between black and white homeless veterans",
+      "authors": "Derek M. Novacek, Jonathan K. Wynn, Sonya Gabrielian, Shirley M. Glynn, Gerhard Helleman, William P. Horan, Robert S. Kern, Junghee Lee, Stephen R. Marder, Catherine Sugar, Michael F. Green",
+      "year": 2022,
+      "venue": "Psychiatry Research",
+      "url": "https://hpri.usc.edu/homeless_research/examining-racial-differences-in-community-integration-between-black-and-white-homeless-veterans/"
+    },
+    {
+      "title": "Exploring the Association of Community Integration in Mental Health among Formerly Homeless Individuals Living in Permanent Supportive Housing",
+      "authors": "Wichada La Motte\u2010Kerr, Harmony Rhoades, Benjamin Henwood, Eric Rice, and Suzanne Wenzel",
+      "year": 2020,
+      "venue": "American Journal of Community Psychology",
+      "url": "https://hpri.usc.edu/homeless_research/exploring-the-association-of-community-integration-in-mental-health-among-formerly-homeless-individuals-living-in-permanent-supportive-housing/"
+    },
+    {
+      "title": "Exploring Community Integration Among Formerly Homeless Veterans in Project\u2011Based Versus Tenant\u2011Based Supportive Housing",
+      "authors": "Melissa Chinchilla, Sonya Gabrielian, Amy Glasmeier, and Michael F. Green",
+      "year": 2020,
+      "venue": "Community Mental Health Journal",
+      "url": "https://hpri.usc.edu/homeless_research/exploring-community-integration-among-formerly-homeless-veterans-in-project%e2%80%91based-versus-tenant%e2%80%91based-supportive-housing/"
+    }
+  ],
+  "l4-t1": [
+    {
+      "title": "Investigating Predictors of Successful Exits from Permanent Supportive Housing",
+      "authors": "Emmy Tiderington, John Palatucci, Evan Cole, Joel Cantor",
+      "year": 2026,
+      "venue": "",
+      "url": "https://hpri.usc.edu/homeless_research/investigating-predictors-of-successful-exits-from-permanent-supportive-housing/"
+    },
+    {
+      "title": "Developing the Life After Supportive Housing (LASH) Readiness Self-Assessment Tool to Promote Successful Exits from Permanent Supportive Housing",
+      "authors": "Emmy Tiderington",
+      "year": 2026,
+      "venue": "Rutgers University School of Social Work",
+      "url": "https://hpri.usc.edu/homeless_research/developing-the-life-after-supportive-housing-lash-readiness-self-assessment-tool-to-promote-successful-exits-from-permanent-supportive-housing/"
+    },
+    {
+      "title": "Innovative PSH Programs: The People Concern\u2019s Contingency Management Program",
+      "authors": "Drea Younes",
+      "year": 2026,
+      "venue": "Homelessness Policy Research Institute",
+      "url": "https://hpri.usc.edu/homeless_research/innovative-psh-programs-the-people-concerns-contingency-management-program/"
+    },
+    {
+      "title": "Housing Works LA\u2019s Slow Skating: A Supportive Service and Development Process for Long-Term PSH Success",
+      "authors": "Maanya Medapa",
+      "year": 2026,
+      "venue": "Homelessness Policy Research Institute",
+      "url": "https://hpri.usc.edu/homeless_research/housing-works-las-slow-skating-a-supportive-service-and-development-process-for-long-term-psh-success/"
+    },
+    {
+      "title": "Innovative PSH Programs: A Community of Friends\u2019 Tenants Advisory Council",
+      "authors": "Doan Le",
+      "year": 2026,
+      "venue": "Homelessness Policy Research Institute",
+      "url": "https://hpri.usc.edu/homeless_research/innovative-psh-programs-a-community-of-friends-tenants-advisory-council/"
+    },
+    {
+      "title": "Assessing Heterogeneity in Homelessness Risk and Housing First Supports\u2019 Effectiveness by Race and Ethnicity among Older Adults Experiencing Homelessness: Evidence from Los Angeles County Final Report",
+      "authors": "Jared N. Schachner, Gary Painter, Steven Schmidt",
+      "year": 2025,
+      "venue": "",
+      "url": "https://hpri.usc.edu/homeless_research/assessing-heterogeneity-in-homelessness-risk-and-housing-first-supports-effectiveness-by-race-and-ethnicity-among-older-adults-experiencing-homelessness-evidence-from-los-angeles-county-fina/"
+    },
+    {
+      "title": "Potential Changes in US Homelessness by Ending Federal Support for Housing First Programs",
+      "authors": "Kirk B. Fetters, Pranav Padmanabhan, Ashley A. Meehan, Margot Kushel, Joshua A. Barocas",
+      "year": 2025,
+      "venue": "JAMA Health Forum",
+      "url": "https://hpri.usc.edu/homeless_research/potential-changes-in-us-homelessness-by-ending-federal-support-for-housing-first-programs/"
+    },
+    {
+      "title": "Towards a Flourishing Framework in and Beyond Permanent Supportive Housing",
+      "authors": "",
+      "year": 2025,
+      "venue": "Homelessness Policy Research Institute",
+      "url": "https://hpri.usc.edu/homeless_research/framework-for-flourishing-a-human-centered-model-for-improvement-within-and-beyond-permanent-supportive-housing-draft/"
+    }
+  ],
+  "l4-t2": [
+    {
+      "title": "A Living Agenda: Shaping the National Research &#038; Policy Future of Street Medicine",
+      "authors": "Kaitlin Schwan, Corinne T. Feldman, Brett Feldman",
+      "year": 2025,
+      "venue": "California Street Medicine Collaborative, USC Street Medicine, USC Institute on Inequalities in Global Health, HPRI",
+      "url": "https://hpri.usc.edu/homeless_research/a-living-agenda-shaping-the-national-research-policy-future-of-street-medicine/"
+    },
+    {
+      "title": "The 2025 National Street Medicine Agenda",
+      "authors": "Kaitlin Schwan, Corinne T. Feldman, Brett Feldman",
+      "year": 2025,
+      "venue": "California Street Medicine Collaborative, USC Street Medicine, USC Institute on Inequalities in Global Health, HPRI",
+      "url": "https://hpri.usc.edu/homeless_research/the-2025-national-street-medicine-agenda/"
+    },
+    {
+      "title": "Mitigating the Health Impacts of Encampment Sweeps in California",
+      "authors": "Kaitlin Schwan, Kyle Patton, Catherine Weaver, Brian Zunner-Keating, Brett Feldman, Daphne Achilles, M.K. Orsulak, Matthew Beare, Corinne T. Feldman, Katherine Pocock",
+      "year": 2025,
+      "venue": "USC Street Medicine",
+      "url": "https://hpri.usc.edu/homeless_research/mitigating-the-health-impacts-of-encampment-sweeps-in-california/"
+    },
+    {
+      "title": "The California Street Medicine Landscape Survey and Report",
+      "authors": "Brett J. Feldman, Corinne T. Feldman, Alexis Coulourides Kogan, Sonali Saluja, Michael Cousineau",
+      "year": 2023,
+      "venue": "California Health Care Foundation",
+      "url": "https://hpri.usc.edu/homeless_research/the-california-street-medicine-landscape-survey-and-report-2/"
+    },
+    {
+      "title": "Behavioral Health Care Delivery Through Street Medicine Programs in California",
+      "authors": "Kimberly Y Su, Brett J Feldman, Corinne T Feldman, Sonali Saluja, Alexis M Coulourides Kogan, Michael R Cousineau",
+      "year": 2023,
+      "venue": "Community Mental Health Journal",
+      "url": "https://hpri.usc.edu/homeless_research/behavioral-health-care-delivery-through-street-medicine-programs-in-california/"
+    },
+    {
+      "title": "Housing Outcomes for Homeless Individuals in Street Outreach Compared to Shelter",
+      "authors": "Christopher Weare",
+      "year": 2021,
+      "venue": "Journal of Poverty",
+      "url": "https://hpri.usc.edu/homeless_research/housing-outcomes-for-homeless-individuals-in-street-outreach-compared-to-shelter/"
+    },
+    {
+      "title": "Homeless Outreach: the Los Angeles County Context",
+      "authors": "",
+      "year": 2019,
+      "venue": "Homelessness Policy Research Institute",
+      "url": "https://hpri.usc.edu/homeless_research/5598/"
+    },
+    {
+      "title": "Standards of Excellence for Outreach Programs/Engagement Services, Emergency/Crisis/Interim Housing, and Permanent Supportive Housing",
+      "authors": "United Way of Greater Los Angeles/Home for Good",
+      "year": 2014,
+      "venue": "Home for Good",
+      "url": "https://hpri.usc.edu/homeless_research/standards-excellence-outreach-programs-engagement-services-emergency-crisis-interim-housing-permanent-supportinve-housing/"
+    }
+  ],
+  "l4-t3": [
+    {
+      "title": "Mobility-Related Barriers to Accessing Homeless Services: Implications for Continuums of Care and Coordinated Entry",
+      "authors": "Amanda Aykanian",
+      "year": 2023,
+      "venue": "Journal of the Society for Social Work and Research",
+      "url": "https://hpri.usc.edu/homeless_research/mobility-related-barriers-to-accessing-homeless-services-implications-for-continuums-of-care-and-coordinated-entry/"
+    },
+    {
+      "title": "Coordinated Entry System Triage Tool Research and Refinement",
+      "authors": "",
+      "year": 2023,
+      "venue": "University of Southern California",
+      "url": "https://hpri.usc.edu/homeless_research/coordinated-entry-system-triage-tool-research-and-refinement/"
+    },
+    {
+      "title": "Children\u2019s Hospital Los Angeles Youth Coordinated Entry System (CES) Final Evaluation Report",
+      "authors": "Tracy Bennett and Katharine Gale",
+      "year": 2017,
+      "venue": "Children's Hospital Los Angeles",
+      "url": "https://hpri.usc.edu/homeless_research/childrens-hospital-los-angeles-youth-coordinated-entry-system-ces-final-evaluation-report/"
+    },
+    {
+      "title": "Family Homelessness Coordinated Entry System Analysis and Refinement Project",
+      "authors": "Katharine Gale",
+      "year": 2014,
+      "venue": "Focus Strategies",
+      "url": "https://hpri.usc.edu/homeless_research/family-homelessness-coordinated-entry-system-analysis-and-refinement-project/"
+    }
+  ],
+  "l4-t4": [
+    {
+      "title": "Advancing Health Equity through Skilled Peer Workers",
+      "authors": "Vanessa Rios & Celina Alvarez",
+      "year": 2022,
+      "venue": "Corporation for Supportive Housing",
+      "url": "https://hpri.usc.edu/homeless_research/advancing-health-equity-through-skilled-peer-workers/"
+    },
+    {
+      "title": "The Field Must Make More Room for More Lived Experience Leaders",
+      "authors": "Eric Richert",
+      "year": "",
+      "venue": "National Alliance to End Homelessness",
+      "url": "https://hpri.usc.edu/homeless_research/the-field-must-make-more-room-for-more-lived-experience-leaders/"
+    }
+  ],
+  "l4-t5": [
+    {
+      "title": "A Living Agenda: Shaping the National Research &#038; Policy Future of Street Medicine",
+      "authors": "Kaitlin Schwan, Corinne T. Feldman, Brett Feldman",
+      "year": 2025,
+      "venue": "California Street Medicine Collaborative, USC Street Medicine, USC Institute on Inequalities in Global Health, HPRI",
+      "url": "https://hpri.usc.edu/homeless_research/a-living-agenda-shaping-the-national-research-policy-future-of-street-medicine/"
+    },
+    {
+      "title": "The 2025 National Street Medicine Agenda",
+      "authors": "Kaitlin Schwan, Corinne T. Feldman, Brett Feldman",
+      "year": 2025,
+      "venue": "California Street Medicine Collaborative, USC Street Medicine, USC Institute on Inequalities in Global Health, HPRI",
+      "url": "https://hpri.usc.edu/homeless_research/the-2025-national-street-medicine-agenda/"
+    },
+    {
+      "title": "Mitigating the Health Impacts of Encampment Sweeps in California",
+      "authors": "Kaitlin Schwan, Kyle Patton, Catherine Weaver, Brian Zunner-Keating, Brett Feldman, Daphne Achilles, M.K. Orsulak, Matthew Beare, Corinne T. Feldman, Katherine Pocock",
+      "year": 2025,
+      "venue": "USC Street Medicine",
+      "url": "https://hpri.usc.edu/homeless_research/mitigating-the-health-impacts-of-encampment-sweeps-in-california/"
+    },
+    {
+      "title": "The California Street Medicine Landscape Survey and Report",
+      "authors": "Brett J. Feldman, Corinne T. Feldman, Alexis Coulourides Kogan, Sonali Saluja, Michael Cousineau",
+      "year": 2023,
+      "venue": "California Health Care Foundation",
+      "url": "https://hpri.usc.edu/homeless_research/the-california-street-medicine-landscape-survey-and-report-2/"
+    },
+    {
+      "title": "Behavioral Health Care Delivery Through Street Medicine Programs in California",
+      "authors": "Kimberly Y Su, Brett J Feldman, Corinne T Feldman, Sonali Saluja, Alexis M Coulourides Kogan, Michael R Cousineau",
+      "year": 2023,
+      "venue": "Community Mental Health Journal",
+      "url": "https://hpri.usc.edu/homeless_research/behavioral-health-care-delivery-through-street-medicine-programs-in-california/"
+    }
+  ],
+  "l4-t6": [
+    {
+      "title": "Frontline Workers: Urban Solutions for Developing a Sustainable Workforce in the Homeless Services Sector of Los Angeles County",
+      "authors": "Vanessa Rios",
+      "year": 2018,
+      "venue": "Antioch University Los Angeles",
+      "url": "https://hpri.usc.edu/homeless_research/frontline-workers-urban-solutions-for-developing-a-sustainable-workforce-in-the-homeless-services-sector-of-los-angeles-county/"
+    }
+  ],
+  "l4-t7": [
+    {
+      "title": "Assessing the Faith-Based Response to Homelessness in America: Findings from Eleven Cities",
+      "authors": "Byron Johnson, William H Wubbenhorst, and Alfreda Alvarez",
+      "year": 2017,
+      "venue": "Baylor Institute for Studies of Religion",
+      "url": "https://hpri.usc.edu/homeless_research/assessing-the-faith-based-response-to-homelessness-in-america-findings-from-eleven-cities/"
+    }
+  ],
+  "out-t1": [
+    {
+      "title": "Managing High-risk Behaviours and Challenges to Prevent Housing Loss in Permanent Supportive Housing: A Rapid Review",
+      "authors": "Nick Kerman, Sean A. Kidd, Christina Mutschler, John Sylvestre, Benjamin F. Henwood, Abe Oudshoorn, Carrie Anne Marshall, Tim Aubry, Vicky Stergiopoulos",
+      "year": 2023,
+      "venue": "Harm Reduction Journal",
+      "url": "https://hpri.usc.edu/homeless_research/managing-high-risk-behaviours-and-challenges-to-prevent-housing-loss-in-permanent-supportive-housing-a-rapid-review/"
+    },
+    {
+      "title": "Better housing outcomes for families and veterans point to the importance of well-resourced and targeted homelessness programs",
+      "authors": "Ryan Finnigan",
+      "year": 2023,
+      "venue": "The Terner Center for Housing Innovation at University of California Berkeley",
+      "url": "https://hpri.usc.edu/homeless_research/better-housing-outcomes-for-families-and-veterans-point-to-the-importance-of-well-resourced-and-targeted-homelessness-programs/"
+    },
+    {
+      "title": "Housing Outcomes for Homeless Individuals in Street Outreach Compared to Shelter",
+      "authors": "Christopher Weare",
+      "year": 2021,
+      "venue": "Journal of Poverty",
+      "url": "https://hpri.usc.edu/homeless_research/housing-outcomes-for-homeless-individuals-in-street-outreach-compared-to-shelter/"
+    },
+    {
+      "title": "Evaluation of the Family Homelessness Systems Initiative: Examining the Effects of Systems Reform on 18-Month Housing Stability and Related Outcomes",
+      "authors": "Debra J. Rog, Kathryn A. Henderson, Clara A. Wagner,  Eleanor M. Kerr, and Harihar Bhattarai",
+      "year": 2021,
+      "venue": "",
+      "url": "https://hpri.usc.edu/homeless_research/9271/"
+    },
+    {
+      "title": "Los Angeles County Office of Diversion and Reentry&#8217;s Supportive Housing Program A Study of Participants&#8217; Housing Stability and New Felony Convictions",
+      "authors": "Sarah B. Hunter, and Adam Scherling",
+      "year": 2019,
+      "venue": "RAND Corporation",
+      "url": "https://hpri.usc.edu/homeless_research/los-angeles-county-office-of-diversion-and-reentrys-supportive-housing-program-a-study-of-participants-housing-stability-and-new-felony-convictions/"
+    }
+  ],
+  "out-t2": [],
+  "out-t3": []
+};
+
+// ═══════════════════════════════════
+// RENDER CATALOGUE PAPERS INTO CARDS
+// ═══════════════════════════════════
+function renderCataloguePapers(topicId) {
+  const papers = CATALOGUE_PAPERS[topicId] || [];
+  if (!papers.length) return '';
+  
+  const rows = papers.slice(0, 6).map(p => {
+    const authorShort = p.authors ? p.authors.split(',').slice(0,2).join(', ') + (p.authors.split(',').length > 2 ? ' et al.' : '') : '';
+    const venueShort = p.venue ? p.venue.slice(0,55) + (p.venue.length > 55 ? '…' : '') : '';
+    const titleClean = p.title.replace(/&#8217;/g,"'").replace(/&#038;/g,'&').replace(/&amp;/g,'&').replace(/&hellip;/g,'…').replace(/&ldquo;/g,'"').replace(/&rdquo;/g,'"');
+    return `<div class="catalogue-row" onclick="window.open('${p.url}','_blank')">
+      <div class="cat-year">${p.year||'—'}</div>
+      <div class="cat-meta">
+        <div class="cat-title">${titleClean}</div>
+        <div class="cat-author">${authorShort}${venueShort ? ' · <em>'+venueShort+'</em>' : ''}</div>
+      </div>
+      <div class="cat-arrow">→</div>
+    </div>`;
+  }).join('');
+  
+  return `<div class="catalogue-section">
+    <div class="catalogue-header">HPRI Research Catalogue — ${papers.length} related paper${papers.length>1?'s':''}</div>
+    ${rows}
+    ${papers.length > 6 ? `<div class="cat-more">+ ${papers.length-6} more on HPRI website</div>` : ''}
+  </div>`;
+}
+
+// Patch openModal to include catalogue papers
+const _origOpenModal = openModal;
+openModal = function(t, sec) {
+  _origOpenModal(t, sec);
+  const catHtml = renderCataloguePapers(t.id);
+  if (catHtml) {
+    document.getElementById('modal-content').insertAdjacentHTML('beforeend', catHtml);
+  }
+};
+
+// Patch buildCard to show paper count
+const _origBuildCard = buildCard;
+buildCard = function(t, sec) {
+  const card = _origBuildCard(t, sec);
+  const count = (CATALOGUE_PAPERS[t.id] || []).length;
+  if (count > 0) {
+    const badge = document.createElement('div');
+    badge.style.cssText = 'margin-top:8px; font-family:Arial,sans-serif; font-size:11px; color:#2980B9; font-weight:bold;';
+    badge.textContent = `📄 ${count} paper${count>1?'s':''} in catalogue`;
+    card.appendChild(badge);
+  }
+  return card;
+};
+
+</script>
+</body>
+</html>
