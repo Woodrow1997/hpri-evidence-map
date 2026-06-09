@@ -486,6 +486,7 @@ body {
   flex-shrink: 0;
   color: white;
 }
+.cc-item.race .cc-dot  { background: linear-gradient(135deg, #4A0E0E, #800000); }
 .cc-item.hist .cc-dot  { background: linear-gradient(135deg, #5D4037, #795548); }
 .cc-item.place .cc-dot { background: linear-gradient(135deg, #1565C0, #1976D2); }
 .cc-item.clim .cc-dot  { background: linear-gradient(135deg, #2E7D32, #388E3C); }
@@ -702,6 +703,11 @@ footer a { color: #aaa; }
     <!-- CROSS-CUTTING SIDEBAR: Three horizontal forces -->
     <div class="crosscut-sidebar">
 
+      <div class="crosscut-label cc-race" onclick="openModal('crosscut-race')" style="background:linear-gradient(90deg,#4A0E0E,#800000);">
+        <span class="cc-icon">⬤</span>
+        Race &amp; Racism
+      </div>
+
       <div class="crosscut-label cc-history" onclick="openModal('crosscut-history')" title="History & Time — click to explore">
         <span class="cc-icon">⏳</span>
         History &amp; Time
@@ -867,8 +873,16 @@ footer a { color: #aaa; }
 
   <!-- CROSS-CUTTING LEGEND -->
   <div class="crosscut-legend">
-    <h3>Three Forces That Cut Across Every Layer — Click to Explore</h3>
+    <h3>Four Forces That Cut Across Every Layer — Click to Explore</h3>
     <div class="crosscut-items">
+
+      <div class="cc-item race" onclick="openModal('crosscut-race')">
+        <div class="cc-dot">⬤</div>
+        <div>
+          <h4>Race &amp; Racism</h4>
+          <p>Race shapes every layer of this framework — who is vulnerable, who falls into homelessness, who gets served, and who gets housed. Black Americans are 3–4× more likely to experience homelessness than white Americans. This reflects the accumulated result of discriminatory housing policy, unequal wealth, and biased institutions operating across generations.</p>
+        </div>
+      </div>
 
       <div class="cc-item hist" onclick="openModal('crosscut-history')">
         <div class="cc-dot">⏳</div>
@@ -1113,6 +1127,14 @@ const LAYERS = {
   },
 
   /* ─── CROSS-CUTTING: HISTORY & TIME ─── */
+  'crosscut-race': {
+    title: 'Race & Racism',
+    tag: 'Cross-Cutting Force · Race & Racism',
+    body: `<p>Race is not a variable in a regression — it is a cross-cutting force that shapes every layer of the homelessness framework. From the structural conditions that concentrate vulnerability, to the pathways that channel certain groups disproportionately into homelessness, to the institutions that respond with unequal urgency, race operates at every level.</p>
+    <p><strong>The disparity is stark:</strong> Black Americans represent 13% of the U.S. population but over 37% of people experiencing homelessness. In Los Angeles, that gap is even wider. This cannot be explained by individual behavior — it is explained by history: redlining, urban renewal, discriminatory lending, mass incarceration, and the long shadow of unequal wealth accumulation.</p>
+    <p><strong>In the response system:</strong> Research consistently shows Black and Latino individuals face longer waits in coordinated entry, fewer referrals to permanent housing, and higher rates of discrimination in shelter placement. An equity-blind response system reproduces racial disparities even when it appears neutral.</p>
+    <p><strong>Research implications:</strong> Race must be centered in data collection, analysis, and program design — not treated as a control variable but as a lens through which every finding must be examined.</p>`
+  },
   'crosscut-history': {
     tag: "Cross-Cutting Force · History & Time",
     title: "The Long Arc That Explains the Present",
