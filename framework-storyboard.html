@@ -38,9 +38,9 @@ html, body {
   inset: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  padding: 24px 40px 80px;
+  padding: 40px 40px 80px;
   opacity: 0;
   transform: translateX(60px);
   transition: opacity 0.45s cubic-bezier(0.4,0,0.2,1), transform 0.45s cubic-bezier(0.4,0,0.2,1);
@@ -311,16 +311,19 @@ html, body {
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.9);
-  margin-bottom: 16px;
+  color: rgba(255,255,255,0.95);
+  margin-bottom: 20px;
+  background: rgba(0,0,0,0.25);
+  border-radius: 6px;
+  padding: 6px 14px;
+  border: 1px solid rgba(255,255,255,0.2);
+  align-self: flex-start;
 }
 
 .layer-step-num {
-  background: rgba(255,255,255,0.25);
-  border-radius: 4px;
-  padding: 3px 10px;
   font-size: 13px;
-  color: white;
+  color: #FFCC00;
+  font-weight: 800;
 }
 
 /* Big question */
@@ -697,7 +700,7 @@ html, body {
 
 /* ── RESPONSIVE ── */
 @media (max-width: 680px) {
-  .slide { padding: 16px 20px 70px; }
+  .slide { padding: 28px 20px 70px; }
   .layer-card-row { grid-template-columns: 1fr; }
   .layer-visual { display: none; }
   .crosscut-grid { grid-template-columns: 1fr; gap: 10px; }
@@ -1050,7 +1053,7 @@ html, body {
     <!-- ══ SLIDE 10: OUTRO ══ -->
     <div class="slide type-outro" data-index="10">
       <div class="slide-content" style="text-align:center;">
-        <div class="layer-step-badge" style="display:inline-block;margin-bottom:16px;">
+        <div class="layer-step-badge" style="margin-bottom:20px;">
           <span class="layer-step-num">Step 10 of 10</span>
           · The full picture
         </div>
